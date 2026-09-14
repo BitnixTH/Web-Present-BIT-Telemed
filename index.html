@@ -1,0 +1,964 @@
+<!doctype html>
+<html lang="th">
+
+<head>
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <meta
+    name="theme-color"
+    content="#1767d9"
+  >
+
+
+  <!-- =====================================================
+       FAVICON
+  ====================================================== -->
+
+  <link
+    rel="icon"
+    type="image/png"
+    href="image/BIT-favicon.png"
+  >
+
+  <link
+    rel="apple-touch-icon"
+    href="image/BIT-favicon.png"
+  >
+
+
+  <title>
+    BIT Telemedicine — Patient Journey Presentation
+  </title>
+
+
+  <meta
+    name="description"
+    content="Interactive bilingual presentation of the BIT Telemedicine 12-step patient journey, key features, benefits and BITHIS/API integration."
+  >
+
+
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
+</head>
+
+
+<body>
+
+
+  <!-- =====================================================
+       HEADER
+  ====================================================== -->
+
+  <header
+    class="site-header"
+    id="top"
+  >
+
+    <a
+      class="brand"
+      href="#hero"
+      aria-label="BIT Telemedicine"
+    >
+
+      <span class="brand-mark">
+        BIT
+      </span>
+
+      <span class="brand-text">
+        BIT Telemedicine
+      </span>
+
+    </a>
+
+
+    <div class="header-actions">
+
+      <a
+        class="header-link"
+        href="#journey"
+        data-th="ภาพรวม"
+        data-en="Overview"
+      >
+        ภาพรวม
+      </a>
+
+
+      <div
+        class="language-toggle"
+        aria-label="Language"
+      >
+
+        <button
+          class="lang-btn active"
+          id="lang-th"
+          type="button"
+          aria-label="ภาษาไทย"
+        >
+          TH
+        </button>
+
+
+        <button
+          class="lang-btn"
+          id="lang-en"
+          type="button"
+          aria-label="English"
+        >
+          EN
+        </button>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+
+  <!-- =====================================================
+       MAIN
+  ====================================================== -->
+
+  <main>
+
+
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
+
+    <section
+      class="hero"
+      id="hero"
+    >
+
+      <img
+        class="hero-art"
+        src="image/header.png"
+        alt="BIT Telemedicine"
+      >
+
+
+      <div class="hero-overlay">
+
+        <div class="hero-copy glass">
+
+          <p
+            class="eyebrow"
+            data-th="ภาพรวม Workflow แบบ Interactive"
+            data-en="INTERACTIVE WORKFLOW PRESENTATION"
+          >
+            ภาพรวม Workflow แบบ Interactive
+          </p>
+
+
+          <h1
+            data-th="BIT Telemedicine — เส้นทางการดูแลผู้ป่วย 12 ขั้นตอน"
+            data-en="BIT Telemedicine — 12-Step Patient Journey"
+          >
+            BIT Telemedicine — เส้นทางการดูแลผู้ป่วย 12 ขั้นตอน
+          </h1>
+
+
+          <p
+            class="hero-subtitle"
+            data-th="จาก Teleconsultation สู่การดูแลผู้ป่วยอย่างต่อเนื่องและเชื่อมโยงครบวงจร"
+            data-en="From Teleconsultation to Connected Continuous Care"
+          >
+            จาก Teleconsultation
+            สู่การดูแลผู้ป่วยอย่างต่อเนื่อง
+            และเชื่อมโยงครบวงจร
+          </p>
+
+
+          <div class="hero-actions">
+
+            <a
+              class="btn primary"
+              href="#presentation"
+              data-th="เริ่มดูเส้นทางการดูแลผู้ป่วย"
+              data-en="Explore Patient Journey"
+            >
+              เริ่มดูเส้นทางการดูแลผู้ป่วย
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         OVERVIEW
+    ====================================================== -->
+
+    <section
+      class="overview section-shell"
+      id="journey"
+    >
+
+      <div class="section-heading centered">
+
+        <p
+          class="eyebrow"
+          data-th="เส้นทางการดูแลผู้ป่วย 12 ขั้นตอน"
+          data-en="12-STEP PATIENT JOURNEY"
+        >
+          เส้นทางการดูแลผู้ป่วย 12 ขั้นตอน
+        </p>
+
+
+        <h2 id="journey-title">
+          เส้นทางการดูแลผู้ป่วย 12 ขั้นตอน
+        </h2>
+
+
+        <p id="journey-subtitle">
+          กระบวนการดูแลผู้ป่วยแบบครบวงจรและเชื่อมโยงข้อมูล
+        </p>
+
+
+        <p
+          class="journey-description"
+          data-th="เลือกขั้นตอนที่ต้องการ เพื่อดูฟังก์ชันสำคัญ ประโยชน์ ขั้นตอนการทำงาน การเชื่อมต่อ BITHIS / API และระบบปัจจุบันที่เกี่ยวข้อง"
+          data-en="Select a step to review Key Features, Benefits, Workflow, BITHIS/API Integration and the related current system."
+        >
+          เลือกขั้นตอนที่ต้องการ
+          เพื่อดูฟังก์ชันสำคัญ ประโยชน์
+          ขั้นตอนการทำงาน การเชื่อมต่อ BITHIS / API
+          และระบบปัจจุบันที่เกี่ยวข้อง
+        </p>
+
+      </div>
+
+
+
+      <!-- VALUE PROPOSITION -->
+
+      <div class="value-strip">
+
+
+        <article>
+
+          <span class="value-icon">
+            🏥
+          </span>
+
+          <b
+            data-th="เชื่อมต่อระบบโรงพยาบาล"
+            data-en="Hospital Integrated"
+          >
+            เชื่อมต่อระบบโรงพยาบาล
+          </b>
+
+          <small
+            data-th="HN · BITHIS · สัญญาณชีพ · ข้อมูลทางคลินิก"
+            data-en="HN · BITHIS · Vital Signs · Clinical Data"
+          >
+            HN · BITHIS · สัญญาณชีพ · ข้อมูลทางคลินิก
+          </small>
+
+        </article>
+
+
+
+        <article>
+
+          <span class="value-icon">
+            🤖
+          </span>
+
+          <b
+            data-th="AI ช่วยงานด้านคลินิก"
+            data-en="AI-assisted Clinical Care"
+          >
+            AI ช่วยงานด้านคลินิก
+          </b>
+
+          <small
+            data-th="Transcript · SOAP · ICD-10 · ร่าง OPD"
+            data-en="Transcript · SOAP · ICD-10 · OPD Draft"
+          >
+            Transcript · SOAP · ICD-10 · ร่าง OPD
+          </small>
+
+        </article>
+
+
+
+        <article>
+
+          <span class="value-icon">
+            🔄
+          </span>
+
+          <b
+            data-th="เส้นทางการดูแลครบวงจร"
+            data-en="End-to-End Journey"
+          >
+            เส้นทางการดูแลครบวงจร
+          </b>
+
+          <small
+            data-th="ลงทะเบียน → รักษา → ติดตาม"
+            data-en="Registration → Care → Follow-up"
+          >
+            ลงทะเบียน → รักษา → ติดตาม
+          </small>
+
+        </article>
+
+
+
+        <article>
+
+          <span class="value-icon">
+            💬
+          </span>
+
+          <b
+            data-th="เชื่อมต่อการสื่อสารกับผู้ป่วย"
+            data-en="Connected Patient Engagement"
+          >
+            เชื่อมต่อการสื่อสารกับผู้ป่วย
+          </b>
+
+          <small
+            data-th="Life Line App + LINE OA"
+            data-en="Life Line App + LINE OA"
+          >
+            Life Line App + LINE OA
+          </small>
+
+        </article>
+
+
+
+        <article>
+
+          <span class="value-icon">
+            💊
+          </span>
+
+          <b
+            data-th="การดูแลด้านยาแบบครบวงจร"
+            data-en="Closed-loop Medication Care"
+          >
+            การดูแลด้านยาแบบครบวงจร
+          </b>
+
+          <small
+            data-th="ใบสั่งยา → จัดส่ง → เภสัชกร → ติดตาม"
+            data-en="Prescription → Delivery → Pharmacist → Follow-up"
+          >
+            ใบสั่งยา → จัดส่ง → เภสัชกร → ติดตาม
+          </small>
+
+        </article>
+
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         12-STEP PRESENTATION
+    ====================================================== -->
+
+    <section
+      class="presentation-shell"
+      id="presentation"
+    >
+
+
+      <!-- STEP PATH -->
+
+      <aside
+        class="step-sidebar"
+        aria-label="Step navigation"
+      >
+
+        <div class="sidebar-title">
+
+          <small
+            class="sidebar-title-text"
+            data-th="เส้นทาง 12 ขั้นตอน"
+            data-en="STEP PATH"
+          >
+            เส้นทาง 12 ขั้นตอน
+          </small>
+
+
+        </div>
+
+
+        <nav
+          id="step-nav"
+          class="step-nav"
+          aria-label="12-Step Patient Journey"
+        ></nav>
+
+      </aside>
+
+
+
+      <!-- STEP CONTENT -->
+
+      <section class="step-stage">
+
+        <div
+          id="step-content"
+          class="step-content"
+        ></div>
+
+      </section>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         SYSTEM-WIDE REMARKS
+    ====================================================== -->
+
+    <section
+      class="remarks section-shell"
+      id="remarks"
+    >
+
+      <div id="remarks-content"></div>
+
+
+
+      <!-- PATIENT SUPPORT -->
+
+      <div class="line-support-showcase">
+
+        <div class="line-support-image-wrap">
+
+          <img
+            src="image/line-oa-support.png"
+            alt="LINE OA Patient Support"
+            class="line-support-image"
+          >
+
+        </div>
+
+
+        <div class="line-support-copy">
+
+          <p
+            class="eyebrow"
+            data-th="บริการช่วยเหลือผู้ป่วย"
+            data-en="PATIENT SUPPORT"
+          >
+            บริการช่วยเหลือผู้ป่วย
+          </p>
+
+
+          <h3
+            data-th="บริการช่วยเหลือผู้ป่วยผ่าน LINE OA"
+            data-en="LINE OA Patient Support"
+          >
+            บริการช่วยเหลือผู้ป่วยผ่าน LINE OA
+          </h3>
+
+
+          <p
+            data-th="รองรับคู่มือฉบับย่อ การแก้ไขปัญหา คำถามที่พบบ่อย และการติดต่อเจ้าหน้าที่ผ่าน LINE Official Account"
+            data-en="Quick Manual, Troubleshooting & FAQ, and Contact Staff are available through LINE Official Account."
+          >
+            รองรับคู่มือฉบับย่อ
+            การแก้ไขปัญหา
+            คำถามที่พบบ่อย
+            และการติดต่อเจ้าหน้าที่ผ่าน LINE Official Account
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         BITHIS / API INTEGRATION
+    ====================================================== -->
+
+    <section
+      class="api-map section-shell"
+      id="api-map"
+    >
+
+      <div class="section-heading centered">
+
+        <p
+          class="eyebrow"
+          data-th="การเชื่อมต่อ BITHIS / API"
+          data-en="BITHIS / API INTEGRATION"
+        >
+          การเชื่อมต่อ BITHIS / API
+        </p>
+
+
+        <h2
+          data-th="จุดเชื่อมต่อข้อมูลสำคัญตลอดเส้นทางการดูแลผู้ป่วย"
+          data-en="Key Integration Points Across the Patient Journey"
+        >
+          จุดเชื่อมต่อข้อมูลสำคัญตลอดเส้นทางการดูแลผู้ป่วย
+        </h2>
+
+      </div>
+
+
+
+      <div class="api-flow">
+
+
+        <!-- 01 -->
+
+        <div class="api-node existing">
+
+          <span>
+            01
+          </span>
+
+          <strong
+            data-th="ผู้ป่วย / HN"
+            data-en="Patient / HN"
+          >
+            ผู้ป่วย / HN
+          </strong>
+
+          <small
+            data-th="ตรวจสอบและจับคู่ข้อมูลผู้ป่วยกับ BITHIS"
+            data-en="BITHIS Patient Matching"
+          >
+            ตรวจสอบและจับคู่ข้อมูลผู้ป่วยกับ BITHIS
+          </small>
+
+        </div>
+
+
+        <div class="api-arrow">
+          →
+        </div>
+
+
+
+        <!-- 02 -->
+
+        <div class="api-node modify">
+
+          <span>
+            02
+          </span>
+
+          <strong
+            data-th="สัญญาณชีพ"
+            data-en="Vital Signs"
+          >
+            สัญญาณชีพ
+          </strong>
+
+          <small
+            data-th="การคัดกรองโดยพยาบาล → BITHIS"
+            data-en="Nurse Screening → BITHIS"
+          >
+            การคัดกรองโดยพยาบาล → BITHIS
+          </small>
+
+        </div>
+
+
+        <div class="api-arrow">
+          →
+        </div>
+
+
+
+        <!-- 03 -->
+
+        <div class="api-node modify">
+
+          <span>
+            03
+          </span>
+
+          <strong
+            data-th="การนัดหมาย"
+            data-en="Appointment"
+          >
+            การนัดหมาย
+          </strong>
+
+          <small
+            data-th="นัดหมาย / แพทย์ / สถานะ"
+            data-en="Appointment / Doctor / Status"
+          >
+            นัดหมาย / แพทย์ / สถานะ
+          </small>
+
+        </div>
+
+
+        <div class="api-arrow">
+          →
+        </div>
+
+
+
+        <!-- 04 -->
+
+        <div class="api-node new">
+
+          <span>
+            04
+          </span>
+
+          <strong
+            data-th="ข้อมูลทางคลินิก / OPD"
+            data-en="Clinical / OPD"
+          >
+            ข้อมูลทางคลินิก / OPD
+          </strong>
+
+          <small>
+            SOAP · ICD-10 · OPD
+          </small>
+
+        </div>
+
+
+        <div class="api-arrow">
+          →
+        </div>
+
+
+
+        <!-- 05 -->
+
+        <div class="api-node pending">
+
+          <span>
+            05
+          </span>
+
+          <strong
+            data-th="ฐานข้อมูลรายการยา"
+            data-en="Medication Master"
+          >
+            ฐานข้อมูลรายการยา
+          </strong>
+
+          <small
+            data-th="รอยืนยันฐานข้อมูลรายการยาจาก BITHIS"
+            data-en="Pending BITHIS Medication Database"
+          >
+            รอยืนยันฐานข้อมูลรายการยาจาก BITHIS
+          </small>
+
+        </div>
+
+
+        <div class="api-arrow">
+          →
+        </div>
+
+
+
+        <!-- 06 -->
+
+        <div class="api-node pending">
+
+          <span>
+            06
+          </span>
+
+          <strong
+            data-th="ค่าใช้จ่ายและรายการเรียกเก็บ"
+            data-en="Billing & Charges"
+          >
+            ค่าใช้จ่ายและรายการเรียกเก็บ
+          </strong>
+
+          <small
+            data-th="ค่าแพทย์ · ค่ายา · ค่าบริการพยาบาล"
+            data-en="Doctor · Medication · Nursing Fee"
+          >
+            ค่าแพทย์ · ค่ายา · ค่าบริการพยาบาล
+          </small>
+
+        </div>
+
+
+        <div class="api-arrow">
+          →
+        </div>
+
+
+
+        <!-- 07 -->
+
+        <div class="api-node new">
+
+          <span>
+            07
+          </span>
+
+          <strong
+            data-th="สถานะการชำระเงิน"
+            data-en="Payment Status"
+          >
+            สถานะการชำระเงิน
+          </strong>
+
+          <small
+            data-th="รอชำระ → ชำระสำเร็จ / ไม่สำเร็จ"
+            data-en="Pending → Paid / Failed"
+          >
+            รอชำระ → ชำระสำเร็จ / ไม่สำเร็จ
+          </small>
+
+        </div>
+
+
+        <div class="api-arrow">
+          →
+        </div>
+
+
+
+        <!-- 08 -->
+
+        <div class="api-node modify">
+
+          <span>
+            08
+          </span>
+
+          <strong
+            data-th="การจ่ายยา"
+            data-en="Dispensing"
+          >
+            การจ่ายยา
+          </strong>
+
+          <small
+            data-th="รายการยา / สถานะการจ่ายยา"
+            data-en="Medication / Dispensing Status"
+          >
+            รายการยา / สถานะการจ่ายยา
+          </small>
+
+        </div>
+
+
+        <div class="api-arrow">
+          →
+        </div>
+
+
+
+        <!-- 09 -->
+
+        <div class="api-node pending">
+
+          <span>
+            09
+          </span>
+
+          <strong
+            data-th="ค่าจัดส่ง"
+            data-en="Delivery Fee"
+          >
+            ค่าจัดส่ง
+          </strong>
+
+          <small
+            data-th="เพิ่มรายการค่าใช้จ่ายผ่าน API → BITHIS"
+            data-en="API Insert Charge → BITHIS"
+          >
+            เพิ่มรายการค่าใช้จ่ายผ่าน API → BITHIS
+          </small>
+
+        </div>
+
+
+      </div>
+
+
+
+      <!-- STATUS LEGEND -->
+
+      <div class="status-legend">
+
+
+        <span>
+
+          <i class="dot existing"></i>
+
+          <span
+            data-th="มีในระบบเดิม / ยืนยันแล้ว"
+            data-en="Existing / Confirmed"
+          >
+            มีในระบบเดิม / ยืนยันแล้ว
+          </span>
+
+        </span>
+
+
+
+        <span>
+
+          <i class="dot modify"></i>
+
+          <span
+            data-th="ปรับแก้"
+            data-en="Modify"
+          >
+            ปรับแก้
+          </span>
+
+        </span>
+
+
+
+        <span>
+
+          <i class="dot new"></i>
+
+          <span
+            data-th="พัฒนาใหม่"
+            data-en="New"
+          >
+            พัฒนาใหม่
+          </span>
+
+        </span>
+
+
+
+        <span>
+
+          <i class="dot pending"></i>
+
+          <span
+            data-th="รอยืนยัน"
+            data-en="Pending Confirmation"
+          >
+            รอยืนยัน
+          </span>
+
+        </span>
+
+
+      </div>
+
+    </section>
+
+
+  </main>
+
+
+
+  <!-- =====================================================
+       FOOTER
+  ====================================================== -->
+
+  <footer class="site-footer">
+
+    <img
+      src="image/footer.png"
+      alt=""
+      class="footer-art"
+    >
+
+
+    <div class="footer-copy">
+
+      <b>
+        BIT Telemedicine
+      </b>
+
+
+      <span
+        data-th="จากการแพทย์ทางไกล สู่การดูแลผู้ป่วยอย่างต่อเนื่องและเชื่อมโยงครบวงจร"
+        data-en="From Teleconsultation to Connected Continuous Care"
+      >
+        จากการแพทย์ทางไกล
+        สู่การดูแลผู้ป่วยอย่างต่อเนื่อง
+        และเชื่อมโยงครบวงจร
+      </span>
+
+    </div>
+
+  </footer>
+
+
+
+  <!-- =====================================================
+       IMAGE MODAL
+  ====================================================== -->
+
+  <div
+    class="modal"
+    id="imageModal"
+    aria-hidden="true"
+  >
+
+    <button
+      class="modal-close"
+      type="button"
+      aria-label="Close"
+    >
+      ×
+    </button>
+
+
+    <img
+      id="modalImage"
+      alt="Preview"
+    >
+
+  </div>
+
+
+
+  <!-- =====================================================
+       TOAST
+  ====================================================== -->
+
+  <div
+    class="toast"
+    id="toast"
+    role="status"
+    aria-live="polite"
+  ></div>
+
+
+
+  <!-- =====================================================
+       SCRIPT
+  ====================================================== -->
+
+  <script src="script.js"></script>
+
+
+</body>
+
+</html>
