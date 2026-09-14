@@ -3099,7 +3099,7 @@ p {
    33. CLEAN PRESENTATION OVERRIDES
    Executive Presentation + Developer Requirement View
    - Full-width main content on desktop
-   - 12-step path always visible on desktop
+   - 11-step path always visible on desktop
    - Solid past path / dotted future path
    - Accordion sections
    - Key Feature hover interaction
@@ -3177,7 +3177,7 @@ p {
     font-size: 14px !important;
   }
 
-  /* All 12 steps stay visible in one desktop viewport */
+  /* All 11 steps stay visible in one desktop viewport */
   #step-nav,
   .step-nav {
     --step-gap: 8px;
@@ -5611,4 +5611,27 @@ canvas {
   .journey-step.active:hover .journey-step-inner {
     transform: none !important;
   }
+}
+
+/* =========================================================
+   11-STEP UPDATE — BITHIS PLATFORM LABEL
+   Finance/Cashier works in BITHIS only, not BIT Telemedicine.
+   ========================================================= */
+
+.platform-icon-text {
+  min-width: 30px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 6px;
+  border-radius: 7px;
+  background: #fff3c8;
+  border: 1px solid #f2c85d;
+  color: #8b6200;
+  font-size: 10px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: 0.03em;
+  flex: 0 0 auto;
 }
