@@ -1728,7 +1728,7 @@ const UI_TEXT = {
 
   th: {
     journeyTitle:
-      'เส้นทางการดูแลผู้ป่วย 11 ขั้นตอน',
+      'เส้นทางการดูแลผู้ป่วย 12 ขั้นตอน',
 
     journeySubtitle:
       'กระบวนการดูแลผู้ป่วยแบบครบวงจรและเชื่อมโยงข้อมูล',
@@ -1830,7 +1830,7 @@ const UI_TEXT = {
 
   en: {
     journeyTitle:
-      '11-Step Patient Journey',
+      '12-Step Patient Journey',
 
     journeySubtitle:
       'End-to-end connected patient care journey',
@@ -2217,7 +2217,7 @@ function isPendingContent(value = '') {
 }
 
 function renderStep08ApiRemark(step) {
-  if (step.id !== 8) return '';
+  if (step.id !== 9) return '';
 
   const items = currentLang === 'th'
     ? [
@@ -4067,29 +4067,30 @@ ROLE_ORDER_BADGES[12] = true;
 
 
 /* =========================================================
-   FINAL 11-STEP JOURNEY PATCH — 14 SEP 2026
+   FINAL 12-STEP JOURNEY PATCH — 14 SEP 2026
 
-   New journey order:
+   Final journey order:
    01 Registration & Patient Profile
    02 Health Profile
    03 Appointment, Notification & Check-in
    04 No Check-in Patient Follow-up
-   05 Nurse Screening + Visit History + Doctor + AI
-   06 Billing & Payment
-   07 Follow-up & Next Appointment
-   08 Medication Delivery
-   09 Accept & Verify Medicine
-   10 Appointment with Pharmacist
-   11 Medical Guidance with Pharmacist
+   05 Nurse Screening
+   06 Doctor Consultation & AI
+   07 Billing & Payment
+   08 Follow-up & Next Appointment
+   09 Medication Delivery
+   10 Accept & Verify Medicine
+   11 Appointment with Pharmacist
+   12 Medical Guidance with Pharmacist
 
-   Patient Visit History remains a supporting function inside Step 05
-   and is no longer counted as a separate journey step.
+   Patient Visit History remains a supporting function inside
+   Nurse Screening and Doctor Consultation, not a separate step.
    ========================================================= */
 
 (() => {
 
   /* -------------------------------------------------------
-     1) REORDER / RENUMBER THE EXISTING STEP OBJECTS
+     1) REORDER / RENUMBER EXISTING STEP OBJECTS
      ------------------------------------------------------- */
 
   const originalById = new Map(
@@ -4101,7 +4102,8 @@ ROLE_ORDER_BADGES[12] = true;
     2,  // Health Profile
     3,  // Appointment / Check-in
     4,  // No Check-in Follow-up
-    6,  // Clinical + AI (Visit History merged here)
+    5,  // Nurse Screening (reuse former Visit History object)
+    6,  // Doctor Consultation + AI
     7,  // Billing & Payment
     12, // Follow-up & Next Appointment
     8,  // Delivery
@@ -4110,18 +4112,20 @@ ROLE_ORDER_BADGES[12] = true;
     11  // Pharmacist Counseling
   ];
 
+  /* Use the exact filenames currently in /image. */
   const iconByNewId = {
     1: '01-registration.png',
     2: '02-health-profile.png',
     3: '03-appointment-checkin.png',
     4: '04-nurse-followup.png',
-    5: '05-clinical-ai.png',
-    6: '06-Icon-Payment.png',
-    7: '07-followup.png',
-    8: '08-delivery.png',
-    9: '09-medication-verify.png',
-    10: '10-pharmacist-appointment.png',
-    11: '11-pharmacist-counseling.png'
+    5: '05 Nurse Screening.png',
+    6: '06-Doctor Consult AI.png',
+    7: '09-Icon-Payment.png',
+    8: '07-followup.png',
+    9: '08-delivery.png',
+    10: '10-medication-verify.png',
+    11: '11-pharmacist-appointment.png',
+    12: '12-pharmacist-counseling.png'
   };
 
   const reorderedSteps = newOrder
@@ -4142,8 +4146,7 @@ ROLE_ORDER_BADGES[12] = true;
 
   /* -------------------------------------------------------
      2) STEP 02 — PATIENT HEALTH PROFILE
-     Patient enters Health Profile + Vital Signs.
-     No BITHIS sync until nurse confirms in Step 05.
+     Patient enters data first. Nurse confirms in Step 05.
      ------------------------------------------------------- */
 
   const step02 = steps.find(step => step.id === 2);
@@ -4216,8 +4219,7 @@ ROLE_ORDER_BADGES[12] = true;
 
   /* -------------------------------------------------------
      3) STEP 04 — NO CHECK-IN FOLLOW-UP
-     Rule locked: No Check-in = Not in Queue.
-     Entire workflow stays inside BIT Telemedicine.
+     Locked rule: No Check-in = Not in Queue.
      ------------------------------------------------------- */
 
   const step04 = steps.find(step => step.id === 4);
@@ -4230,7 +4232,7 @@ ROLE_ORDER_BADGES[12] = true;
     step04.th.title = 'ติดตามผู้ป่วยที่ยังไม่เช็กอิน';
     step04.th.short = 'ติดตามผู้ป่วย';
     step04.th.desc =
-      'ติดตามผู้ป่วยที่ถึงเวลานัดแล้วแต่ยังไม่ Check-in ซึ่งหมายถึงยังไม่เข้าสู่คิว พร้อมระบบแจ้งเตือน การติดตามโดยพยาบาล และการเก็บประวัติย้อนหลัง';
+      'ติดตามผู้ป่วยที่ถึงเวลานัดแล้วแต่ยังไม่เช็กอิน ซึ่งหมายถึงยังไม่เข้าสู่คิว พร้อมระบบแจ้งเตือน การติดตามโดยพยาบาล และการเก็บประวัติย้อนหลัง';
 
     step04.en.title = 'No Check-in Patient Follow-up';
     step04.en.short = 'No Check-in follow-up';
@@ -4239,13 +4241,13 @@ ROLE_ORDER_BADGES[12] = true;
 
     step04.th.features = [
       'ระบบส่ง Reminder ผ่าน LINE OA ก่อนเวลานัดอัตโนมัติ เช่น 30, 15, 10, 5, 3 และ 1 นาที',
-      'เมื่อถึงเวลานัดแล้วผู้ป่วยยังไม่ Check-in (= ยังไม่เข้าสู่คิว) ระบบเพิ่มผู้ป่วยเข้าสู่รายการ “ต้องโทรติดตามวันนี้” อัตโนมัติ',
+      'เมื่อถึงเวลานัดแล้วผู้ป่วยยังไม่เช็กอิน (= ยังไม่เข้าสู่คิว) ระบบเพิ่มผู้ป่วยเข้าสู่รายการ “ต้องโทรติดตามวันนี้” อัตโนมัติ',
       'แสดงชื่อผู้ป่วย HN แพทย์ เวลานัด จำนวนเวลาที่สาย เบอร์โทร จำนวนครั้งที่ติดตาม และเวลาติดตามล่าสุด',
-      'พยาบาลโทรหาผู้ป่วยหรือส่งลิงก์ Check-in ซ้ำผ่าน LINE OA ได้',
+      'พยาบาลโทรหาผู้ป่วยหรือส่งลิงก์เช็กอินซ้ำผ่าน LINE OA ได้',
       'พยาบาลสามารถตั้งเวลาติดตามซ้ำ เช่น 5 หรือ 10 นาที',
       'บันทึกผลการติดตาม เช่น ติดต่อได้และกำลังเข้าระบบ, ขอเลื่อนนัด, ยกเลิกนัด, ไม่รับสาย หรือเบอร์ไม่ถูกต้อง',
       'เก็บ Attempt No., เวลา, พยาบาลผู้ติดตาม, ผลการติดต่อ และหมายเหตุเป็น Audit Trail',
-      'เมื่อผู้ป่วย Check-in สำเร็จ ระบบนำผู้ป่วยออกจากรายการติดตามและเข้าสู่ Waiting / Screening Queue อัตโนมัติ'
+      'เมื่อผู้ป่วยเช็กอินสำเร็จ ระบบนำผู้ป่วยออกจากรายการติดตามและเข้าสู่ Waiting / Screening Queue อัตโนมัติ'
     ];
 
     step04.en.features = [
@@ -4261,11 +4263,11 @@ ROLE_ORDER_BADGES[12] = true;
 
     step04.th.flow = [
       'แจ้งเตือนก่อนเวลานัด',
-      'ถึงเวลานัดแล้วยังไม่ Check-in',
+      'ถึงเวลานัดแล้วยังไม่เช็กอิน',
       'เข้าสู่รายการติดตาม',
       'พยาบาลโทร / ส่งลิงก์ซ้ำ',
       'บันทึกผลการติดตาม',
-      'ผู้ป่วย Check-in',
+      'ผู้ป่วยเช็กอิน',
       'นำออกจากรายการติดตาม → เข้าคิว'
     ];
 
@@ -4283,9 +4285,9 @@ ROLE_ORDER_BADGES[12] = true;
     step04.en.integration = [];
 
     step04.th.notes = [
-      'ยังไม่ Check-in = ยังไม่เข้าสู่คิว',
+      'ยังไม่เช็กอิน = ยังไม่เข้าสู่คิว',
       'ขั้นตอนนี้ดำเนินการภายใน BIT Telemedicine และไม่มี API เชื่อมไป BITHIS',
-      'เมื่อผู้ป่วย Check-in และเข้าสู่ Waiting / Screening Queue แล้ว ต้อง Auto-remove จากรายการติดตาม',
+      'เมื่อผู้ป่วยเช็กอินและเข้าสู่ Waiting / Screening Queue แล้ว ต้องนำผู้ป่วยออกจากรายการติดตามโดยอัตโนมัติ',
       'ประวัติการติดตามต้องเก็บเป็น Audit Trail เพื่อดูย้อนหลังได้'
     ];
 
@@ -4299,167 +4301,261 @@ ROLE_ORDER_BADGES[12] = true;
 
 
   /* -------------------------------------------------------
-     4) STEP 05 — MERGE VISIT HISTORY INTO CLINICAL WORKFLOW
-     Nurse and Doctor can review prior Visit history during care.
+     4) STEP 05 — NURSE SCREENING ONLY
      ------------------------------------------------------- */
 
   const step05 = steps.find(step => step.id === 5);
 
   if (step05) {
-    step05.role = 'doctor';
-    step05.roles = ['nurse', 'doctor'];
+    step05.role = 'nurse';
+    step05.roles = ['nurse'];
     step05.hasBithisApi = true;
 
-    step05.th.title = 'คัดกรองและพบแพทย์';
-    step05.th.short = 'คัดกรองและพบแพทย์';
+    step05.th.title = 'คัดกรองผู้ป่วย';
+    step05.th.short = 'คัดกรองผู้ป่วย';
     step05.th.desc =
-      'พยาบาลคัดกรองและตรวจสอบข้อมูลผู้ป่วย รวมถึงประวัติ Visit เดิม ก่อนยืนยัน Vital Signs และ Sync เข้า BITHIS จากนั้นส่งต่อให้แพทย์ตรวจผ่าน Video Call โดยแพทย์สามารถดูประวัติการรักษาย้อนหลังและใช้ AI ช่วยจัดทำเอกสารทางคลินิก';
+      'พยาบาลตรวจสอบข้อมูลผู้ป่วยและประวัติ Visit เดิม ทบทวนข้อมูลคัดกรองและ Vital Signs ที่ผู้ป่วยกรอกไว้ จัดลำดับความสำคัญ ยืนยันข้อมูล และ Sync Vital Signs เข้า BITHIS ก่อนส่งต่อแพทย์';
 
-    step05.en.title = 'Nurse Screening → Doctor → AI';
-    step05.en.short = 'Screening, history & consultation';
+    step05.en.title = 'Nurse Screening';
+    step05.en.short = 'Nurse screening';
     step05.en.desc =
-      'The nurse screens the patient and reviews prior Visit history, confirms vital signs and syncs them to BITHIS, then hands off to the doctor for video consultation. The doctor can review clinical history and use AI-assisted documentation.';
+      'The nurse reviews patient information and prior Visit history, checks patient-entered screening data and vital signs, confirms triage, syncs vital signs to BITHIS, and then hands the patient off to the doctor.';
 
     step05.th.features = [
-      'พยาบาลและแพทย์สามารถค้นหาและเปิดดูประวัติ Visit เดิมตามสิทธิ์ โดยค้นหาจากชื่อผู้ป่วย HN เลขที่นัดหมาย วันที่ แพทย์ หรือสถานะ Visit',
-      'ข้อมูลทางคลินิกต้องผูกกับ Visit หรือ Appointment ID เพื่อไม่ให้ข้อมูลจากคนละ Visit ปะปนกัน',
-      'พยาบาลตรวจสอบข้อมูลคัดกรองและ Vital Signs ที่ผู้ป่วยกรอกในขั้นตอนที่ 02 และสามารถแก้ไขหรือเพิ่มข้อมูลได้',
-      'ความดันโลหิตเป็นข้อมูลบังคับก่อนยืนยันการคัดกรอง',
-      'เมื่อพยาบาลยืนยัน Vital Signs ระบบ Sync ข้อมูลเข้า BITHIS ผ่าน API ก่อนส่งต่อแพทย์',
+      'พยาบาลเปิดดู Visit History ของผู้ป่วยตามสิทธิ์ โดยข้อมูลต้องผูกกับ Visit หรือ Appointment ID',
+      'ตรวจสอบข้อมูล Health Profile และ Vital Signs ที่ผู้ป่วยกรอกไว้ในขั้นตอนที่ 02',
+      'พยาบาลสามารถแก้ไขหรือเพิ่มข้อมูลคัดกรองและ Vital Signs ได้ก่อนยืนยัน',
+      'ความดันโลหิต (BP) เป็นข้อมูลบังคับก่อนยืนยันการคัดกรอง',
+      'ประเมินความเร่งด่วนและจัดลำดับผู้ป่วยตาม Workflow ของโรงพยาบาล',
+      'เมื่อพยาบาลยืนยัน Vital Signs ระบบ Sync ข้อมูลเข้า BITHIS ผ่าน API',
       'หาก Sync ไม่สำเร็จ ต้องแสดง Error และ Retry โดยยังไม่ส่งต่อแพทย์',
-      'แพทย์เปิดดู Visit History และข้อมูลคัดกรองก่อนหรือระหว่าง Video Consultation ได้',
-      'แสดง AI Subtitle / Transcript แบบเรียลไทม์ใต้หน้าวิดีโอ และแยกจาก Chat ที่อยู่ด้านขวา',
-      'หลังการตรวจ AI ช่วยสร้าง Transcript → SOAP Summary → ICD-10 Recommendation → OPD Draft',
-      'AI เป็นผู้ช่วยเสนอและสร้างร่างเท่านั้น แพทย์เป็นผู้ตรวจสอบ แก้ไข และยืนยันข้อมูลสุดท้าย',
-      'รองรับ Save Draft และ Save Final และจัดเก็บเอกสารทางคลินิกตาม Workflow ของโรงพยาบาล'
+      'เมื่อ Sync สำเร็จ จึงยืนยันการคัดกรองและส่งผู้ป่วยต่อให้แพทย์'
     ];
 
     step05.en.features = [
-      'Nurse and doctor can search and review prior Visits by permission using patient name, HN, appointment number, date, doctor or Visit status',
-      'Clinical data is linked to Visit / Appointment ID so records from different Visits do not mix',
-      'Nurse reviews patient-entered screening data and vital signs from Step 02 and can correct or add information',
-      'Blood pressure is required before screening confirmation',
-      'After nurse confirmation, vital signs sync to BITHIS via API before handoff to the doctor',
-      'Failed sync shows an error and retry; the case is not sent to the doctor yet',
-      'Doctor can review Visit History and screening information before or during the video consultation',
-      'Real-time AI subtitle / transcript appears below the video and remains separate from Chat on the right',
-      'After consultation: AI Transcript → SOAP Summary → ICD-10 Recommendation → OPD Draft',
-      'AI assists and drafts only; the doctor reviews, edits and confirms the final content',
-      'Support Save Draft and Save Final according to the hospital clinical-document workflow'
+      'Nurse can open Visit History by permission; data must be linked to Visit or Appointment ID',
+      'Review Health Profile and Vital Signs entered by the patient in Step 02',
+      'Nurse can correct or add screening information and vital signs before confirmation',
+      'Blood pressure (BP) is required before screening confirmation',
+      'Assess urgency and prioritize the patient according to hospital workflow',
+      'After nurse confirmation, sync Vital Signs to BITHIS via API',
+      'If sync fails, show Error and Retry and do not hand off to the doctor',
+      'After successful sync, confirm screening and send the patient to the doctor'
     ];
 
     step05.th.benefits = [
-      'ทีมรักษาเห็นทั้งข้อมูลปัจจุบันและประวัติ Visit เดิมในจุดเดียว',
-      'ลดความเสี่ยงข้อมูลจากคนละ Visit ปะปนกัน',
-      'ลดการบันทึกข้อมูลซ้ำและเชื่อม Vital Signs เข้าสู่ BITHIS อย่างเป็นระบบ',
-      'AI ช่วยลดภาระการจัดทำเอกสาร โดยแพทย์ยังคงเป็นผู้ตัดสินใจและยืนยันข้อมูลสุดท้าย'
+      'พยาบาลเห็นข้อมูลปัจจุบันและประวัติ Visit เดิมก่อนส่งต่อแพทย์',
+      'ลดการบันทึก Vital Signs ซ้ำและเชื่อมข้อมูลเข้าสู่ BITHIS อย่างเป็นระบบ',
+      'ลดความเสี่ยงจากข้อมูลคนละ Visit ปะปนกัน',
+      'ทำให้แพทย์ได้รับข้อมูลคัดกรองที่ผ่านการตรวจสอบแล้ว'
     ];
 
     step05.en.benefits = [
-      'Shows current data and prior Visit history in one clinical workflow',
-      'Reduces the risk of mixing records from different Visits',
-      'Reduces duplicate documentation and provides structured Vital Signs sync to BITHIS',
-      'AI reduces documentation workload while the doctor retains final clinical control'
+      'Gives the nurse current data and prior Visit history before doctor handoff',
+      'Reduces duplicate vital-sign entry and connects confirmed data to BITHIS',
+      'Reduces the risk of mixing data across Visits',
+      'Provides the doctor with nurse-verified screening information'
     ];
 
     step05.th.flow = [
-      'พยาบาลเปิดดู Visit History',
-      'ตรวจสอบข้อมูลคัดกรองและ Vital Signs',
-      'ยืนยัน → Sync BITHIS',
-      'ส่งต่อแพทย์',
-      'แพทย์เปิดดูประวัติและ Video Call',
-      'AI ถอดเสียงการสนทนา',
-      'AI สรุป SOAP',
-      'AI แนะนำ ICD-10',
-      'AI สร้าง OPD Draft',
-      'แพทย์ตรวจสอบและยืนยัน'
+      'เปิด Visit History',
+      'ตรวจข้อมูลคัดกรองและ Vital Signs',
+      'ประเมินความเร่งด่วน / จัดลำดับ',
+      'ยืนยัน Vital Signs',
+      'Sync BITHIS',
+      'Sync สำเร็จ',
+      'ส่งต่อแพทย์'
     ];
 
     step05.en.flow = [
-      'Nurse Reviews Visit History',
+      'Open Visit History',
       'Review Screening & Vital Signs',
-      'Confirm → Sync BITHIS',
-      'Send to Doctor',
-      'Doctor Reviews History + Video Call',
-      'AI Transcript',
-      'SOAP Summary',
-      'ICD-10 Recommendation',
-      'OPD Draft',
-      'Doctor Review & Final'
+      'Assess Urgency / Prioritize',
+      'Confirm Vital Signs',
+      'Sync BITHIS',
+      'Sync Success',
+      'Hand Off to Doctor'
     ];
 
     step05.th.integration = [
-      'Vital Signs หลังพยาบาลยืนยัน',
-      'ข้อมูลทางคลินิก / OPD ตาม Workflow ที่ยืนยัน'
+      'Vital Signs หลังพยาบาลยืนยัน'
     ];
 
     step05.en.integration = [
-      'Vital Signs after nurse confirmation',
-      'Clinical / OPD data under the confirmed workflow'
+      'Vital Signs after nurse confirmation'
     ];
 
     step05.th.notes = [
-      'Patient Visit History ไม่ได้นับเป็น Step แยก แต่เป็นฟังก์ชันที่พยาบาลและแพทย์เปิดดูได้ระหว่างการคัดกรองและการตรวจ',
+      'Patient Visit History ไม่ได้นับเป็น Step แยก แต่เป็นฟังก์ชันที่พยาบาลเปิดดูได้ระหว่างการคัดกรอง',
       'ข้อมูลประวัติการรักษาต้องผูกกับ Visit หรือ Appointment ID',
-      'AI Subtitle ต้องอยู่ใต้ Video และ Chat ต้องอยู่ด้านขวาอย่างชัดเจน',
-      'AI มีหน้าที่ช่วยสรุป แนะนำ และสร้างร่างเท่านั้น แพทย์เป็นผู้ยืนยันข้อมูลสุดท้าย',
-      'การคีย์รายการยาผ่าน BIT Telemedicine และการใช้ Medication Master จาก BITHIS ยังรอยืนยัน API / Interface'
+      'หาก Sync Vital Signs ไม่สำเร็จ ต้องแสดง Error และ Retry โดยยังไม่ส่งต่อแพทย์',
+      'ส่งต่อแพทย์ได้เมื่อ Vital Signs Sync เข้า BITHIS สำเร็จแล้ว'
     ];
 
     step05.en.notes = [
-      'Patient Visit History is not a separate journey step; it is a function available to nurses and doctors during screening and consultation.',
-      'Clinical history must be linked to Visit / Appointment ID.',
-      'AI Subtitle stays below the video and Chat stays on the right.',
-      'AI assists, recommends and drafts; the doctor confirms the final clinical content.',
-      'Medication entry in BIT Telemedicine and use of the BITHIS Medication Master remain pending API / interface confirmation.'
+      'Patient Visit History is not a separate journey step; it is available during nurse screening.',
+      'Clinical history must be linked to Visit or Appointment ID.',
+      'If Vital Signs sync fails, show Error and Retry and do not hand off to the doctor.',
+      'Doctor handoff is available only after successful Vital Signs sync to BITHIS.'
     ];
+
+    step05.th.status = ['modify', 'new'];
+    step05.en.status = ['modify', 'new'];
   }
 
 
   /* -------------------------------------------------------
-     5) STEP 06 — BILLING & PAYMENT
+     5) STEP 06 — DOCTOR CONSULTATION + AI ONLY
      ------------------------------------------------------- */
 
   const step06 = steps.find(step => step.id === 6);
 
   if (step06) {
-    step06.role = 'nurse';
-    step06.roles = ['nurse', 'patient', 'cashier'];
+    step06.role = 'doctor';
+    step06.roles = ['doctor', 'patient'];
     step06.hasBithisApi = true;
+
+    step06.th.title = 'พบแพทย์และ AI ช่วยจัดทำเอกสารทางคลินิก';
+    step06.th.short = 'พบแพทย์และ AI';
+    step06.th.desc =
+      'แพทย์เปิดดู Visit History และข้อมูลคัดกรองที่พยาบาลยืนยันแล้ว ตรวจผู้ป่วยผ่าน Video Call และใช้ AI ช่วยถอดเสียง สรุป SOAP แนะนำ ICD-10 และสร้าง OPD Draft โดยแพทย์เป็นผู้ตรวจสอบ แก้ไข และยืนยันข้อมูลสุดท้าย';
+
+    step06.en.title = 'Doctor Consultation & AI';
+    step06.en.short = 'Doctor consult & AI';
+    step06.en.desc =
+      'The doctor reviews Visit History and nurse-confirmed screening data, consults the patient by video, and uses AI for transcript, SOAP summary, ICD-10 recommendations and an OPD draft. The doctor reviews, edits and confirms the final clinical content.';
+
+    step06.th.features = [
+      'แพทย์เปิดดู Visit History และข้อมูลคัดกรองก่อนหรือระหว่าง Video Consultation ได้',
+      'หน้า Consultation แสดง Video Call พร้อม AI Subtitle / Transcript แบบเรียลไทม์ใต้หน้าวิดีโอ',
+      'Chat แสดงแยกทางด้านขวา โดย AI Subtitle / Transcript และ Chat เป็นคนละส่วน',
+      'AI ถอดเสียงการสนทนาแบบ Real-time และแยกผู้พูด',
+      'หลังการตรวจ AI ช่วยสร้าง Transcript → SOAP Summary → ICD-10 Recommendation → OPD Draft',
+      'แพทย์ตรวจสอบ แก้ไข และยืนยันข้อมูลทางคลินิกก่อนบันทึกเป็นข้อมูลสุดท้าย',
+      'รองรับ Save Draft และ Save Final ตาม Workflow ของโรงพยาบาล',
+      'AI มีหน้าที่ช่วยสรุป แนะนำ และสร้างร่างเท่านั้น ไม่ยืนยันผลการรักษาแทนแพทย์'
+    ];
+
+    step06.en.features = [
+      'Doctor can open Visit History and nurse-confirmed screening data before or during the video consultation',
+      'Consultation screen shows Video Call with real-time AI Subtitle / Transcript below the video',
+      'Chat stays in a separate panel on the right; AI Subtitle / Transcript is not Chat',
+      'AI transcribes the consultation in real time with speaker separation',
+      'After consultation: Transcript → SOAP Summary → ICD-10 Recommendation → OPD Draft',
+      'Doctor reviews, edits and confirms the final clinical content',
+      'Support Save Draft and Save Final according to hospital workflow',
+      'AI assists, recommends and drafts only; the doctor remains the final clinical decision-maker'
+    ];
+
+    step06.th.benefits = [
+      'แพทย์เห็นประวัติและข้อมูลคัดกรองที่ผ่านการยืนยันก่อนเริ่มตรวจ',
+      'ลดภาระการจัดทำเอกสารทางคลินิกด้วย AI',
+      'ช่วยให้การสรุป SOAP และการเลือก ICD-10 มีโครงสร้างชัดเจน',
+      'แพทย์ยังคงเป็นผู้ตรวจสอบและยืนยันข้อมูลสุดท้าย'
+    ];
+
+    step06.en.benefits = [
+      'Gives the doctor verified history and screening information before consultation',
+      'Reduces clinical documentation workload with AI assistance',
+      'Provides structured SOAP and ICD-10 support',
+      'Keeps the doctor in control of final clinical confirmation'
+    ];
+
+    step06.th.flow = [
+      'แพทย์เปิด Visit History',
+      'เริ่ม Video Call',
+      'AI ถอดเสียงแบบ Real-time',
+      'AI สรุป SOAP',
+      'AI แนะนำ ICD-10',
+      'AI สร้าง OPD Draft',
+      'แพทย์ตรวจสอบ / แก้ไข',
+      'แพทย์ยืนยันข้อมูลสุดท้าย'
+    ];
+
+    step06.en.flow = [
+      'Open Visit History',
+      'Start Video Call',
+      'AI Real-time Transcript',
+      'AI SOAP Summary',
+      'AI ICD-10 Recommendation',
+      'AI OPD Draft',
+      'Doctor Review / Edit',
+      'Doctor Final Confirmation'
+    ];
+
+    step06.th.integration = [
+      'รอยืนยัน: API รายการยา ค่าแพทย์ ค่ายา และค่าบริการโรงพยาบาล — ต้องยืนยันว่าจะคีย์รายการยาและค่าใช้จ่ายใน BIT Telemedicine หรือ BITHIS'
+    ];
+
+    step06.en.integration = [
+      'Pending confirmation: API for medication list, doctor fee, medication fee and hospital service fee — confirm whether medication and charges will be entered in BIT Telemedicine or BITHIS'
+    ];
+
+    step06.th.notes = [
+      'Patient Visit History ไม่ได้นับเป็น Step แยก แต่แพทย์สามารถเปิดดูได้ก่อนหรือระหว่างการตรวจ',
+      'ข้อมูลประวัติการรักษาต้องผูกกับ Visit หรือ Appointment ID',
+      'AI Subtitle / Transcript ต้องอยู่ใต้ Video และ Chat ต้องอยู่ด้านขวาอย่างชัดเจน',
+      'AI เป็นผู้ช่วยเสนอ สรุป และสร้างร่างเท่านั้น แพทย์เป็นผู้ตรวจสอบ แก้ไข และยืนยันข้อมูลสุดท้าย',
+      'รอยืนยัน Workflow การคีย์รายการยา ค่าแพทย์ ค่ายา และค่าบริการโรงพยาบาล ว่าจะบันทึกผ่าน BIT Telemedicine หรือ BITHIS รวมถึงรูปแบบ API / Interface ระหว่างสองระบบ'
+    ];
+
+    step06.en.notes = [
+      'Patient Visit History is not a separate journey step; the doctor can open it before or during consultation.',
+      'Clinical history must be linked to Visit or Appointment ID.',
+      'AI Subtitle / Transcript stays below the video and Chat stays on the right.',
+      'AI assists, recommends and drafts; the doctor reviews, edits and confirms the final clinical content.',
+      'Pending confirmation: confirm whether the medication list, doctor fee, medication fee and hospital service fee will be entered in BIT Telemedicine or BITHIS, including the required API / interface.'
+    ];
+
+    step06.th.status = ['modify', 'new', 'pending'];
+    step06.en.status = ['modify', 'new', 'pending'];
   }
 
 
   /* -------------------------------------------------------
-     6) STEP 07 — FOLLOW-UP IMMEDIATELY AFTER PAYMENT
+     6) STEP 07 — BILLING & PAYMENT
      ------------------------------------------------------- */
 
   const step07 = steps.find(step => step.id === 7);
 
   if (step07) {
     step07.role = 'nurse';
-    step07.roles = ['nurse', 'patient'];
+    step07.roles = ['nurse', 'patient', 'cashier'];
     step07.hasBithisApi = true;
+  }
 
-    step07.th.title = 'ติดตามอาการและนัดหมายครั้งถัดไป';
-    step07.th.short = 'ติดตามและนัดครั้งถัดไป';
-    step07.th.desc =
+
+  /* -------------------------------------------------------
+     7) STEP 08 — FOLLOW-UP & NEXT APPOINTMENT
+     ------------------------------------------------------- */
+
+  const step08 = steps.find(step => step.id === 8);
+
+  if (step08) {
+    step08.role = 'nurse';
+    step08.roles = ['nurse', 'patient'];
+    step08.hasBithisApi = true;
+
+    step08.th.title = 'ติดตามอาการและนัดหมายครั้งถัดไป';
+    step08.th.short = 'ติดตามและนัดครั้งถัดไป';
+    step08.th.desc =
       'หลังผู้ป่วยชำระเงินเรียบร้อยแล้ว พยาบาลสามารถติดตามอาการและจัดทำนัด Follow-up ครั้งถัดไปได้ทันที เพื่อให้การดูแลต่อเนื่องก่อนเข้าสู่ขั้นตอนจัดส่งยาและการดูแลด้านยา';
 
-    step07.en.title = 'Follow-up & Next Appointment';
-    step07.en.short = 'Follow-up & next visit';
-    step07.en.desc =
-      'After successful payment, the nurse can follow up with the patient and create the next follow-up appointment immediately, supporting continuous care before medication delivery and pharmacist care.';
+    step08.en.title = 'Follow-up & Next Appointment';
+    step08.en.short = 'Follow-up & next visit';
+    step08.en.desc =
+      'After successful payment, the nurse can follow up with the patient and create the next follow-up appointment, supporting continuous care before medication delivery and pharmacist care.';
 
-    step07.th.features = [
+    step08.th.features = [
       'แพทย์สามารถระบุแผนหรือช่วงเวลาที่ต้อง Follow-up ไว้จากขั้นตอนการตรวจ',
       'หลังชำระเงินสำเร็จ พยาบาลสามารถติดตามอาการและสร้างนัดหมายครั้งถัดไปได้',
       'พยาบาลสามารถอัปเดตรายละเอียดนัด Follow-up ตามแผนการรักษา',
       'ส่งการยืนยันนัด Reminder และ Notification ผ่าน LINE OA',
       'ผู้ป่วยดูรายละเอียดนัดหมายครั้งถัดไปได้ผ่าน Life App',
-      'เมื่อถึงรอบนัดใหม่ ผู้ป่วยกลับเข้าสู่ขั้นตอนนัดหมายและ Check-in ตาม Journey เดิม'
+      'เมื่อถึงรอบนัดใหม่ ผู้ป่วยกลับเข้าสู่ขั้นตอนนัดหมายและเช็กอินตาม Journey เดิม'
     ];
 
-    step07.en.features = [
+    step08.en.features = [
       'Doctor can define the follow-up plan or interval during consultation',
       'After successful payment, the nurse can follow up and create the next appointment',
       'Nurse can update follow-up appointment details according to the care plan',
@@ -4468,19 +4564,19 @@ ROLE_ORDER_BADGES[12] = true;
       'At the next visit, the patient returns to the appointment and check-in journey'
     ];
 
-    step07.th.benefits = [
+    step08.th.benefits = [
       'นัด Follow-up ได้ต่อเนื่องทันทีหลังชำระเงิน',
       'ลดโอกาสผู้ป่วยหลุดจากการติดตามรักษา',
       'เชื่อม Visit ปัจจุบันกับ Visit ครั้งถัดไปได้ชัดเจน'
     ];
 
-    step07.en.benefits = [
+    step08.en.benefits = [
       'Allows continuous follow-up scheduling immediately after payment',
       'Reduces loss to follow-up',
       'Clearly connects the current Visit with the next Visit'
     ];
 
-    step07.th.flow = [
+    step08.th.flow = [
       'ชำระเงินสำเร็จ',
       'พยาบาลติดตามอาการ',
       'ตรวจสอบแผน Follow-up',
@@ -4490,7 +4586,7 @@ ROLE_ORDER_BADGES[12] = true;
       'กลับเข้าสู่ Appointment Journey เมื่อถึงรอบนัด'
     ];
 
-    step07.en.flow = [
+    step08.en.flow = [
       'Payment Completed',
       'Nurse Follow-up',
       'Review Follow-up Plan',
@@ -4500,24 +4596,24 @@ ROLE_ORDER_BADGES[12] = true;
       'Return to Appointment Journey at Next Visit'
     ];
 
-    step07.th.integration = [
+    step08.th.integration = [
       'ข้อมูลนัดหมายครั้งถัดไป',
       'ข้อมูลแพทย์ / ตารางนัด'
     ];
 
-    step07.en.integration = [
+    step08.en.integration = [
       'Next Appointment Data',
       'Doctor / Schedule Data'
     ];
 
-    step07.th.notes = [
-      'ตำแหน่งของขั้นตอนนี้ล็อกไว้หลัง Step 06 ค่าใช้จ่ายและชำระเงิน',
+    step08.th.notes = [
+      'ขั้นตอนนี้อยู่หลัง Step 07 ค่าใช้จ่ายและชำระเงิน',
       'พยาบาลเป็นผู้ดำเนินการสร้างนัด Follow-up ในขั้นตอนนี้',
-      'เมื่อถึงรอบนัดใหม่ ผู้ป่วยใช้กติกาการแจ้งเตือนและ Check-in ตามขั้นตอนที่ 03'
+      'เมื่อถึงรอบนัดใหม่ ผู้ป่วยใช้กติกาการแจ้งเตือนและเช็กอินตามขั้นตอนที่ 03'
     ];
 
-    step07.en.notes = [
-      'This step is positioned immediately after Step 06 Billing & Payment.',
+    step08.en.notes = [
+      'This step is positioned immediately after Step 07 Billing & Payment.',
       'The nurse creates the follow-up appointment in this step.',
       'At the next appointment, notification and check-in rules follow Step 03.'
     ];
@@ -4525,7 +4621,7 @@ ROLE_ORDER_BADGES[12] = true;
 
 
   /* -------------------------------------------------------
-     7) ROLE / PLATFORM / API META FOR THE NEW 11-STEP ORDER
+     8) FINAL ROLE / API META FOR 12 STEPS
      ------------------------------------------------------- */
 
   const finalMeta = {
@@ -4533,13 +4629,14 @@ ROLE_ORDER_BADGES[12] = true;
     2: { roles: ['patient'], hasBithisApi: false },
     3: { roles: ['patient', 'nurse'], hasBithisApi: true },
     4: { roles: ['nurse'], hasBithisApi: false },
-    5: { roles: ['nurse', 'doctor'], hasBithisApi: true },
-    6: { roles: ['nurse', 'patient', 'cashier'], hasBithisApi: true },
-    7: { roles: ['nurse', 'patient'], hasBithisApi: true },
-    8: { roles: ['patient', 'pharmacist', 'cashier'], hasBithisApi: true },
-    9: { roles: ['patient'], hasBithisApi: false },
-    10: { roles: ['patient', 'pharmacist'], hasBithisApi: false },
-    11: { roles: ['pharmacist', 'patient'], hasBithisApi: false }
+    5: { roles: ['nurse'], hasBithisApi: true },
+    6: { roles: ['doctor', 'patient'], hasBithisApi: true },
+    7: { roles: ['nurse', 'patient', 'cashier'], hasBithisApi: true },
+    8: { roles: ['nurse', 'patient'], hasBithisApi: true },
+    9: { roles: ['patient', 'pharmacist', 'cashier'], hasBithisApi: true },
+    10: { roles: ['patient'], hasBithisApi: false },
+    11: { roles: ['patient', 'pharmacist'], hasBithisApi: false },
+    12: { roles: ['pharmacist', 'patient'], hasBithisApi: false }
   };
 
   steps.forEach(step => {
@@ -4547,25 +4644,36 @@ ROLE_ORDER_BADGES[12] = true;
     if (!meta) return;
     step.roles = [...meta.roles];
     step.hasBithisApi = meta.hasBithisApi;
+    ACTUAL_STEP_META[step.id] = {
+      roles: [...meta.roles],
+      hasBithisApi: meta.hasBithisApi
+    };
   });
 
 
   /* -------------------------------------------------------
-     8) ROLE ACTIONS FOR THE NEW NUMBERING
+     9) ROLE ACTIONS FOR FINAL NUMBERING
      ------------------------------------------------------- */
 
   ROLE_ACTIONS[5] = {
     nurse: {
-      th: 'ดูประวัติ Visit คัดกรอง ตรวจสอบ Vital Signs และส่งต่อแพทย์',
-      en: 'Review Visit history, screen, confirm vital signs and hand off to doctor'
-    },
-    doctor: {
-      th: 'ดูประวัติการรักษา ตรวจผ่าน Video Call และยืนยันเอกสารทางคลินิก',
-      en: 'Review clinical history, consult by video and confirm clinical documentation'
+      th: 'เปิด Visit History ตรวจข้อมูลคัดกรอง ยืนยัน Vital Signs และส่งต่อแพทย์',
+      en: 'Review Visit history, confirm screening and vital signs, then hand off to the doctor'
     }
   };
 
   ROLE_ACTIONS[6] = {
+    doctor: {
+      th: 'ดูประวัติการรักษา ตรวจผ่าน Video Call และยืนยันเอกสารทางคลินิก',
+      en: 'Review history, consult by video and confirm clinical documentation'
+    },
+    patient: {
+      th: 'เข้าร่วม Video Call กับแพทย์',
+      en: 'Join the doctor video consultation'
+    }
+  };
+
+  ROLE_ACTIONS[7] = {
     nurse: {
       th: 'ตรวจสอบและยืนยันรายการค่าใช้จ่ายก่อนส่งให้ผู้ป่วย',
       en: 'Review and confirm charges before sending the bill'
@@ -4580,7 +4688,7 @@ ROLE_ORDER_BADGES[12] = true;
     }
   };
 
-  ROLE_ACTIONS[7] = {
+  ROLE_ACTIONS[8] = {
     nurse: {
       th: 'ติดตามอาการและสร้างนัด Follow-up ครั้งถัดไปหลังชำระเงิน',
       en: 'Follow up and create the next appointment after payment'
@@ -4591,7 +4699,7 @@ ROLE_ORDER_BADGES[12] = true;
     }
   };
 
-  ROLE_ACTIONS[8] = {
+  ROLE_ACTIONS[9] = {
     patient: {
       th: 'เลือกที่อยู่ วิธีส่ง และติดตามสถานะการจัดส่งยา',
       en: 'Choose address, delivery method and track delivery'
@@ -4606,14 +4714,14 @@ ROLE_ORDER_BADGES[12] = true;
     }
   };
 
-  ROLE_ACTIONS[9] = {
+  ROLE_ACTIONS[10] = {
     patient: {
       th: 'ยืนยันรับยา ตรวจสอบยา และส่งรูปหรือวิดีโอ',
       en: 'Confirm receipt, verify medication and upload photo/video'
     }
   };
 
-  ROLE_ACTIONS[10] = {
+  ROLE_ACTIONS[11] = {
     patient: {
       th: 'เลือกนัด เช็กอิน และรอเภสัชกร',
       en: 'Book, check in and wait for the pharmacist'
@@ -4624,7 +4732,7 @@ ROLE_ORDER_BADGES[12] = true;
     }
   };
 
-  ROLE_ACTIONS[11] = {
+  ROLE_ACTIONS[12] = {
     pharmacist: {
       th: 'ให้คำแนะนำและบันทึก Counseling Note',
       en: 'Counsel the patient and record a counseling note'
@@ -4637,34 +4745,32 @@ ROLE_ORDER_BADGES[12] = true;
 
 
   /* -------------------------------------------------------
-     9) ROLE ORDER BADGES
+     10) ROLE ORDER BADGES / REMARKS
      ------------------------------------------------------- */
 
   Object.keys(ROLE_ORDER_BADGES).forEach(key => {
     delete ROLE_ORDER_BADGES[key];
   });
 
-  [5, 6, 7, 8, 10, 11].forEach(stepId => {
+  [6, 7, 8, 9, 11, 12].forEach(stepId => {
     ROLE_ORDER_BADGES[stepId] = true;
   });
 
-  /* Step 01 and 03 keep the original remark because card position
-     is not intended to define the workflow order. */
-  delete ROLE_INLINE_REMARKS[5];
-  delete ROLE_INLINE_REMARKS[6];
-  delete ROLE_INLINE_REMARKS[7];
-  delete ROLE_INLINE_REMARKS[8];
-  delete ROLE_INLINE_REMARKS[9];
-  delete ROLE_INLINE_REMARKS[10];
-  delete ROLE_INLINE_REMARKS[11];
+  /* Keep Step 01 and Step 03 original multi-role remarks only. */
+  Object.keys(ROLE_INLINE_REMARKS).forEach(key => {
+    const id = Number(key);
+    if (![1, 3].includes(id)) {
+      delete ROLE_INLINE_REMARKS[key];
+    }
+  });
 
 
   /* -------------------------------------------------------
-     10) UI LABELS
+     11) UI LABELS
      ------------------------------------------------------- */
 
-  UI_TEXT.th.journeyTitle = 'เส้นทางการดูแลผู้ป่วย 11 ขั้นตอน';
-  UI_TEXT.en.journeyTitle = '11-Step Patient Journey';
+  UI_TEXT.th.journeyTitle = 'เส้นทางการดูแลผู้ป่วย 12 ขั้นตอน';
+  UI_TEXT.en.journeyTitle = '12-Step Patient Journey';
 
 })();
 
