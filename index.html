@@ -46,6 +46,16 @@
     rel="stylesheet"
     href="style.css"
   >
+
+
+  <!-- Always start a fresh page load at the Header / top of page -->
+  <script>
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+  </script>
+
 </head>
 
 
@@ -1149,4 +1159,3 @@
 <!-- Presentation playback: autoplay-on-open hook + Play/Pause + audio-master timeline + TH/EN sync. -->
 
 <!-- Hero player is independently linked to Hero audio/timeline and TH-EN setting. -->
-

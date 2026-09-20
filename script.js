@@ -2300,7 +2300,7 @@ function renderRoleSummary(step) {
         : '');
 
   return `
-    <div class="step-role-row" aria-label="${currentLang === 'th' ? 'ผู้เกี่ยวข้องในขั้นตอนนี้' : 'Roles in this step'}">
+    <div class="step-role-row role-count-${Math.min(roles.length, 3)}" data-step="${step.id}" data-role-count="${roles.length}" aria-label="${currentLang === 'th' ? 'ผู้เกี่ยวข้องในขั้นตอนนี้' : 'Roles in this step'}">
       ${roles.map((roleId, roleIndex) => {
         const meta = ROLE_META[roleId];
         if (!meta) return '';
@@ -6596,4 +6596,44 @@ document.addEventListener(
   /* Initialize Hero only. Do NOT autoplay Hero merely because Present opens. */
   switchHeroLanguage(getLang());
   refresh();
+})();
+
+/* =========================================================
+   INITIAL PAGE POSITION FIX — 20 SEP 2026
+   Fresh open / refresh starts at the Header, not Hero Animation.
+   This intentionally runs only during initial page restoration.
+   ========================================================= */
+(() => {
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+  }
+
+  let initialPositionLocked = true;
+
+  const forceInitialTop = () => {
+    if (!initialPositionLocked) return;
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  };
+
+  forceInitialTop();
+
+  document.addEventListener('DOMContentLoaded', forceInitialTop, { once: true });
+
+  window.addEventListener('load', () => {
+    forceInitialTop();
+
+    /* Release after layout, fonts and media have had time to settle. */
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        forceInitialTop();
+        initialPositionLocked = false;
+      });
+    });
+  }, { once: true });
+
+  window.addEventListener('pageshow', (event) => {
+    if (event.persisted) {
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    }
+  });
 })();
