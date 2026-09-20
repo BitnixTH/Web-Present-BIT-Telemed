@@ -113,6 +113,10 @@ const steps = [
         'modify',
         'new'
       ]
+    },
+    latestStatus: {
+      th: ['ผู้ป่วยเก่าใน BITHIS ใช้ HN เดิมและไม่ต้องยืนยันตัวตนซ้ำ', 'ผู้ป่วยใหม่ต้องยืนยันตัวตนก่อน และเจ้าหน้าที่โรงพยาบาลสร้าง HN ใหม่ใน BITHIS', 'เลข ID ทั้งฝั่งผู้ป่วยและโรงพยาบาลต้องแสดงแบบปกปิดข้อมูล (*** )', 'กรณี Reject การยืนยันตัวตน: ต้องมีเหตุผลแบบ Drop-down, Note และลิงก์กลับหน้าที่ต้องแก้ไขโดยตรง', 'Consent Redirect และการย้าย Pop-up มาแสดงกลางหน้าจออยู่ระหว่างพัฒนา'],
+      en: ['Existing BITHIS patients use their existing HN and do not require repeat identity verification.', 'New patients require identity verification; hospital staff creates the new HN in BITHIS.', 'Patient and hospital ID numbers should be masked (***).', 'Rejected verification should provide a drop-down reason, note, and direct link back to the page requiring correction.', 'Consent redirect and centered pop-up improvements are under development.']
     }
   },
 
@@ -228,6 +232,10 @@ const steps = [
         'modify',
         'new'
       ]
+    },
+    latestStatus: {
+      th: ['สถานะปัจจุบัน: สัญญาณชีพกรอกได้จากฝั่งโรงพยาบาล/พยาบาล', 'การให้ผู้ป่วยกรอก V/S ผ่าน Life App ยังอยู่ระหว่างพัฒนา', 'ต้องรองรับการบันทึก V/S หลายครั้งและ Plot Graph เพื่อดูแนวโน้ม'],
+      en: ['Current status: vital signs can be entered by hospital staff/nurses.', 'Patient-entered vital signs through the Life App are still under development.', 'Planned enhancement: multiple vital-sign records and trend graphs.']
     }
   },
 
@@ -593,6 +601,15 @@ steps.push(
         'modify',
         'new'
       ]
+    },
+    latestStatus: {
+      th: ['สถานะปัจจุบัน: พยาบาลเป็นผู้บันทึก V/S ระหว่างการคัดกรอง', 'พยาบาลจัดกลุ่ม/คัดกรองและส่งต่อผู้ป่วยให้แพทย์', 'หลัง Screening ผู้ป่วยรอแพทย์ต่อในห้องวิดีโอเดิมได้ โดยไม่ต้องวางสายหรือ Check-in ซ้ำ', 'Chat ระหว่าง Video Call ใช้งานได้แล้ว'],
+      en: ['Current status: the nurse records vital signs during screening.', 'The nurse groups/triages the patient and forwards the patient to the doctor.', 'After screening, the patient can remain in the same video room to wait for the doctor without checking in again.', 'Chat during the video call is available.']
+    }
+    ,
+    latestStatus: {
+      th: ['Current AI flow: AI Transcription → AI Summary → SOAP → ICD-10 (Primary + Secondary)', 'AI Draft OPD ยังอยู่ระหว่างพัฒนา และมี Requirement ให้แสดงเป็น %', 'เอกสารสามารถ Export PDF → Print ให้แพทย์เซ็น → Scan เข้า EMR ใน BITHIS', 'รองรับโหมดแบ่งหน้าจอระหว่าง Video Call'],
+      en: ['Current AI flow: AI Transcription → AI Summary → SOAP → ICD-10 (Primary + Secondary).', 'AI Draft OPD is still under development, with a requirement to display a percentage.', 'Document flow: Export PDF → doctor signs printed document → scan into the EMR in BITHIS.', 'Split-view mode is supported during the video call.']
     }
   },
 
@@ -869,6 +886,10 @@ steps.push(
         'new',
         'pending'
       ]
+    },
+    latestStatus: {
+      th: ['Current Flow ยังไม่สามารถ Key รายการยาได้ เนื่องจาก Medication Flow ยังไม่ Confirm', 'Flow ปัจจุบัน: ไม่ใส่รายการยา → ส่งค่าใช้จ่าย → ผู้ป่วยตรวจสอบค่าใช้จ่าย', 'Current Flow จบที่ Patient View Charges', 'Payment / Medication / Integration หลังจากจุดนี้ต้องรอ Final Workflow'],
+      en: ['The current flow cannot yet enter medication items because the Medication Flow is not confirmed.', 'Current flow: no medication item entry → send charges → patient views charges.', 'The current implemented flow ends at Patient View Charges.', 'Payment, medication, and downstream integration require the final workflow to be confirmed.']
     }
   },
 
@@ -997,6 +1018,11 @@ steps.push(
         'pending'
       ]
     }
+    ,
+    workflowStatus: {
+      th: "แผนการทำงานที่เสนอ / รอยืนยันขั้นตอนการทำงานฉบับสุดท้าย",
+      en: "Proposed workflow / Pending final workflow confirmation"
+    }
   },
 
 
@@ -1056,6 +1082,11 @@ steps.push(
         'new',
         'modify'
       ]
+    ,
+    workflowStatus: {
+      th: "แผนการทำงานที่เสนอ / รอยืนยันขั้นตอนการทำงานฉบับสุดท้าย",
+      en: "Proposed workflow / Pending final workflow confirmation"
+    },
     },
 
 
@@ -1231,6 +1262,11 @@ steps.push(
         'pending'
       ]
     }
+    ,
+    workflowStatus: {
+      th: "แผนการทำงานที่เสนอ / รอยืนยันขั้นตอนการทำงานฉบับสุดท้าย",
+      en: "Proposed workflow / Pending final workflow confirmation"
+    }
   },
 
 
@@ -1347,6 +1383,11 @@ steps.push(
       status: [
         'new'
       ]
+    }
+    ,
+    workflowStatus: {
+      th: "แผนการทำงานที่เสนอ / รอยืนยันขั้นตอนการทำงานฉบับสุดท้าย",
+      en: "Proposed workflow / Pending final workflow confirmation"
     }
   },
 
@@ -1534,7 +1575,12 @@ const ROLE_INLINE_REMARKS = {
   3: {
     th: 'ข้อสังเกต: ขั้นตอนนี้มีหลายบทบาท ให้ดำเนินการตามลำดับงาน โดยไม่ยึดตำแหน่งหรือลำดับของบทบาท',
     en: 'Remark: This step involves multiple roles. Follow the workflow without relying on card position or role order.'
-  },
+    ,
+    workflowStatus: {
+      th: "แผนการทำงานที่เสนอ / รอยืนยันขั้นตอนการทำงานฉบับสุดท้าย",
+      en: "Proposed workflow / Pending final workflow confirmation"
+    },
+    },
   5: {
     th: 'ข้อสังเกต: ขั้นตอนนี้มีหลายบทบาท ให้ดำเนินการตามลำดับงาน โดยไม่ยึดตำแหน่งหรือลำดับของบทบาท',
     en: 'Remark: This step involves multiple roles. Follow the workflow without relying on card position or role order.'
@@ -2654,6 +2700,62 @@ function accordionSection(
 
 
 /* =========================================================
+   STEP PRESENTATION MEDIA
+   Thai / English infographic + narration
+   ========================================================= */
+
+function getStepPresentationImagePath(stepId = currentStepId, lang = currentLang) {
+
+  const languageFolder =
+    lang === 'th'
+      ? 'PIC-TH'
+      : 'PIC-EN';
+
+  const filePrefix =
+    lang === 'th'
+      ? 'PIC-TH'
+      : 'PIC-EN';
+
+  return (
+    `image/PIC-BIT/${languageFolder}/${filePrefix}${stepId}.png`
+  );
+
+}
+
+
+function renderStepPresentationMedia(step) {
+
+  const imagePath =
+    getStepPresentationImagePath(
+      step.id,
+      currentLang
+    );
+
+  const altText =
+    currentLang === 'th'
+      ? `อินโฟกราฟิกขั้นตอนที่ ${String(step.id).padStart(2, '0')} ${step.th.title}`
+      : `Step ${String(step.id).padStart(2, '0')} infographic: ${step.en.title}`;
+
+  return `
+    <section
+      class="step-presentation-media"
+      aria-label="${altText}"
+    >
+      <div class="step-presentation-image-wrap">
+        <img
+          src="${imagePath}"
+          class="step-presentation-image"
+          alt="${altText}"
+          loading="eager"
+        >
+      </div>
+    </section>
+  `;
+
+}
+
+
+/* =========================================================
    MAIN STEP CARD
    ========================================================= */
 
@@ -2777,9 +2879,35 @@ function renderCurrentStep() {
 
           </button>
 
+          <button
+            class="action-btn presentation-btn"
+            type="button"
+            id="presentation-btn"
+          >
+            <span class="action-icon">🖼️</span>
+            <span>${currentLang === 'th' ? 'นำเสนอ' : 'Present'}</span>
+          </button>
+
+          <div class="audio-timeline compact-audio-timeline" id="audio-timeline">
+            <span class="audio-time" id="audio-current-time">0:00</span>
+            <input
+              class="audio-progress"
+              id="audio-progress"
+              type="range"
+              min="0"
+              max="100"
+              step="0.1"
+              value="0"
+              aria-label="${currentLang === 'th' ? 'ตำแหน่งเสียง' : 'Audio position'}"
+            >
+            <span class="audio-time" id="audio-duration">--:--</span>
+          </div>
+
         </div>
 
       </header>
+
+      ${renderStepPresentationMedia(step)}
 
 
       ${
@@ -3025,8 +3153,108 @@ function bindStepCardEvents() {
       toggleStepAudio
     );
 
+  document
+    .getElementById('audio-progress')
+    ?.addEventListener('input', event => seekStepAudio(event.target.value));
+
+  document
+    .getElementById('presentation-btn')
+    ?.addEventListener('click', openStepPresentation);
+
+  document
+    .querySelector('.step-presentation-image-wrap')
+    ?.addEventListener('click', openStepPresentation);
+
 }
 
+
+/* =========================================================
+   FULLSCREEN STEP PRESENTATION
+   Infographic + narration + seekable timeline
+   ========================================================= */
+
+function closeStepPresentation() {
+  const overlay = document.getElementById('step-presentation-overlay');
+  if (!overlay) return;
+
+  stopAudio();
+  overlay.remove();
+  document.body.classList.remove('presentation-open');
+
+  if (document.fullscreenElement && document.exitFullscreen) {
+    document.exitFullscreen().catch(() => {});
+  }
+}
+
+function openStepPresentation() {
+  stopAudio();
+
+  const step = steps.find(item => item.id === currentStepId);
+  if (!step) return;
+
+  document.getElementById('step-presentation-overlay')?.remove();
+
+  const imagePath = getStepPresentationImagePath(step.id, currentLang);
+  const altText = currentLang === 'th'
+    ? `อินโฟกราฟิกขั้นตอนที่ ${String(step.id).padStart(2, '0')} ${step.th.title}`
+    : `Step ${String(step.id).padStart(2, '0')} infographic: ${step.en.title}`;
+
+  const overlay = document.createElement('div');
+  overlay.id = 'step-presentation-overlay';
+  overlay.className = 'presentation-overlay';
+  overlay.setAttribute('role', 'dialog');
+  overlay.setAttribute('aria-modal', 'true');
+  overlay.innerHTML = `
+    <div class="presentation-toolbar">
+      <button type="button" class="presentation-control" id="presentation-audio-btn">
+        <span id="presentation-audio-icon">⏸</span>
+        <span id="presentation-audio-text">${currentLang === 'th' ? 'พักเสียง' : 'Pause'}</span>
+      </button>
+      <button type="button" class="presentation-control" id="presentation-close-btn">
+        ✕ ${currentLang === 'th' ? 'ปิด' : 'Close'}
+      </button>
+    </div>
+
+    <img src="${imagePath}" class="presentation-overlay-image" alt="${altText}">
+
+    <div class="presentation-audio-dock">
+      <span class="audio-time" id="presentation-current-time">0:00</span>
+      <input
+        class="audio-progress presentation-progress"
+        id="presentation-audio-progress"
+        type="range"
+        min="0"
+        max="100"
+        step="0.1"
+        value="0"
+        aria-label="${currentLang === 'th' ? 'ตำแหน่งเสียงนำเสนอ' : 'Presentation audio position'}"
+      >
+      <span class="audio-time" id="presentation-duration">--:--</span>
+    </div>
+  `;
+
+  document.body.appendChild(overlay);
+  document.body.classList.add('presentation-open');
+
+  overlay.querySelector('#presentation-close-btn')
+    ?.addEventListener('click', closeStepPresentation);
+
+  overlay.querySelector('#presentation-audio-btn')
+    ?.addEventListener('click', toggleStepAudio);
+
+  overlay.querySelector('#presentation-audio-progress')
+    ?.addEventListener('input', event => seekStepAudio(event.target.value));
+
+  overlay.addEventListener('click', event => {
+    if (event.target === overlay) closeStepPresentation();
+  });
+
+  if (overlay.requestFullscreen) {
+    overlay.requestFullscreen().catch(() => {});
+  }
+
+  playStepAudio();
+}
 
 /* =========================================================
    OPEN STEP
@@ -3112,146 +3340,139 @@ function openStep(stepId) {
 
 /* =========================================================
    AUDIO
+   Shared player for Listen + Present + seekable timeline
    ========================================================= */
 
 function getAudioPath() {
+  const stepNumber = String(currentStepId).padStart(2, '0');
+  const languageFolder = currentLang === 'th' ? 'Sound-TH' : 'Sound-EN';
+  const languageSuffix = currentLang === 'th' ? 'TH' : 'EN';
 
-  return (
-    `audio/step-${String(currentStepId).padStart(2, '0')}-${currentLang}.mp3`
-  );
-
+  return `image/Sound-BIT/${languageFolder}/${stepNumber}-${languageSuffix}.wav`;
 }
 
+function formatAudioTime(seconds) {
+  if (!Number.isFinite(seconds) || seconds < 0) return '--:--';
+  const mins = Math.floor(seconds / 60);
+  const secs = Math.floor(seconds % 60);
+  return `${mins}:${String(secs).padStart(2, '0')}`;
+}
 
-function toggleStepAudio() {
+function updateAudioUI() {
+  const audio = activeAudio;
+  const duration = audio && Number.isFinite(audio.duration) ? audio.duration : 0;
+  const current = audio && Number.isFinite(audio.currentTime) ? audio.currentTime : 0;
+  const percent = duration > 0 ? (current / duration) * 100 : 0;
+  const isPlaying = Boolean(audio && !audio.paused && !audio.ended);
 
-  const buttonText =
-    document.getElementById(
-      'audio-btn-text'
-    );
+  const mainProgress = document.getElementById('audio-progress');
+  const mainCurrent = document.getElementById('audio-current-time');
+  const mainDuration = document.getElementById('audio-duration');
+  const mainText = document.getElementById('audio-btn-text');
 
-  const text =
-    UI_TEXT[currentLang];
+  if (mainProgress) mainProgress.value = String(percent);
+  if (mainCurrent) mainCurrent.textContent = formatAudioTime(current);
+  if (mainDuration) mainDuration.textContent = duration > 0 ? formatAudioTime(duration) : '--:--';
+  if (mainText) mainText.textContent = isPlaying ? UI_TEXT[currentLang].stop : UI_TEXT[currentLang].listen;
 
+  const presentProgress = document.getElementById('presentation-audio-progress');
+  const presentCurrent = document.getElementById('presentation-current-time');
+  const presentDuration = document.getElementById('presentation-duration');
+  const presentText = document.getElementById('presentation-audio-text');
+  const presentIcon = document.getElementById('presentation-audio-icon');
 
-  if (
-    activeAudio &&
-    !activeAudio.paused
-  ) {
+  if (presentProgress) presentProgress.value = String(percent);
+  if (presentCurrent) presentCurrent.textContent = formatAudioTime(current);
+  if (presentDuration) presentDuration.textContent = duration > 0 ? formatAudioTime(duration) : '--:--';
+  if (presentText) presentText.textContent = isPlaying
+    ? (currentLang === 'th' ? 'พักเสียง' : 'Pause')
+    : (currentLang === 'th' ? 'เล่นเสียง' : 'Play');
+  if (presentIcon) presentIcon.textContent = isPlaying ? '⏸' : '▶';
+}
 
-    stopAudio();
+function attachAudioEvents(audio) {
+  ['loadedmetadata', 'durationchange', 'timeupdate', 'play', 'pause', 'seeking', 'seeked']
+    .forEach(eventName => audio.addEventListener(eventName, updateAudioUI));
 
-    return;
+  audio.addEventListener('ended', () => {
+    audio.currentTime = 0;
+    updateAudioUI();
+  });
 
+  audio.addEventListener('error', () => {
+    if (activeAudio === audio) activeAudio = null;
+    updateAudioUI();
+    showToast(UI_TEXT[currentLang].audioMissing);
+  });
+}
+
+function ensureStepAudio() {
+  const expectedPath = getAudioPath();
+
+  if (activeAudio && activeAudio.dataset?.sourcePath === expectedPath) {
+    return activeAudio;
   }
-
-
-  const audio =
-    new Audio(
-      getAudioPath()
-    );
-
-
-  activeAudio =
-    audio;
-
-
-  audio
-    .play()
-    .then(
-      () => {
-
-        if (buttonText) {
-
-          buttonText.textContent =
-            text.stop;
-
-        }
-
-      }
-    )
-    .catch(
-      () => {
-
-        activeAudio =
-          null;
-
-
-        if (buttonText) {
-
-          buttonText.textContent =
-            text.listen;
-
-        }
-
-
-        showToast(
-          text.audioMissing
-        );
-
-      }
-    );
-
-
-  audio.addEventListener(
-    'ended',
-    () => {
-
-      activeAudio =
-        null;
-
-
-      const currentButtonText =
-        document.getElementById(
-          'audio-btn-text'
-        );
-
-
-      if (currentButtonText) {
-
-        currentButtonText.textContent =
-          UI_TEXT[currentLang]
-            .listen;
-
-      }
-
-    }
-  );
-
-}
-
-
-function stopAudio() {
 
   if (activeAudio) {
-
     activeAudio.pause();
-
-    activeAudio.currentTime =
-      0;
-
-    activeAudio =
-      null;
-
+    activeAudio.currentTime = 0;
   }
 
-
-  const buttonText =
-    document.getElementById(
-      'audio-btn-text'
-    );
-
-
-  if (buttonText) {
-
-    buttonText.textContent =
-      UI_TEXT[currentLang]
-        .listen;
-
-  }
-
+  const audio = new Audio(expectedPath);
+  audio.preload = 'metadata';
+  audio.dataset.sourcePath = expectedPath;
+  activeAudio = audio;
+  attachAudioEvents(audio);
+  updateAudioUI();
+  return audio;
 }
 
+function playStepAudio() {
+  const audio = ensureStepAudio();
+
+  audio.play()
+    .then(updateAudioUI)
+    .catch(() => {
+      if (activeAudio === audio) activeAudio = null;
+      updateAudioUI();
+      showToast(UI_TEXT[currentLang].audioMissing);
+    });
+}
+
+function toggleStepAudio() {
+  const audio = ensureStepAudio();
+
+  if (!audio.paused && !audio.ended) {
+    audio.pause();
+    updateAudioUI();
+    return;
+  }
+
+  if (audio.ended) audio.currentTime = 0;
+  playStepAudio();
+}
+
+function seekStepAudio(percentValue) {
+  const audio = ensureStepAudio();
+  const percent = Math.min(100, Math.max(0, Number(percentValue) || 0));
+
+  if (!Number.isFinite(audio.duration) || audio.duration <= 0) {
+    return;
+  }
+
+  audio.currentTime = (percent / 100) * audio.duration;
+  updateAudioUI();
+}
+
+function stopAudio() {
+  if (activeAudio) {
+    activeAudio.pause();
+    activeAudio.currentTime = 0;
+    activeAudio = null;
+  }
+
+  updateAudioUI();
+}
 
 /* =========================================================
    LANGUAGE
@@ -3286,11 +3507,15 @@ function changeLanguage(lang) {
 
   updateLineSupportShowcase();
 
+  updateDevelopmentViewerLanguage();
+
   renderStepNavigation();
 
   renderCurrentStep();
 
   renderRemarks();
+
+  updateHeroLanguage();
 
 }
 
@@ -3631,7 +3856,244 @@ function updateLineSupportShowcase() {
 
   }
 
+  const demoLabel =
+    section.querySelector('.line-support-demo-label');
+
+  if (demoLabel) {
+    demoLabel.textContent =
+      currentLang === 'th'
+        ? 'ดูตัวอย่าง LINE OA Support'
+        : 'View LINE OA Support Demo';
+  }
+
+  updateLineSupportVideoLanguage();
+
 }
+
+
+
+/* =========================================================
+   LINE OA SUPPORT VIDEO
+   - TH: image/Line-QA/Line-OA-TH/Line-OA-TH.mov
+   - EN: image/Line-QA/Line-OA-EN/Line-OA-EN.mov
+   - Video is the master for Play/Pause + Timeline
+   ========================================================= */
+
+const LINE_SUPPORT_VIDEO = {
+  th: 'image/Line-QA/Line-OA-TH/Line-OA-TH.mov',
+  en: 'image/Line-QA/Line-OA-EN/Line-OA-EN.mov'
+};
+
+function formatLineSupportVideoTime(seconds) {
+  const safe = Number.isFinite(seconds) && seconds > 0 ? seconds : 0;
+  const min = Math.floor(safe / 60);
+  const sec = Math.floor(safe % 60);
+  return `${min}:${String(sec).padStart(2, '0')}`;
+}
+
+function updateLineSupportVideoLanguage() {
+  const modal = document.getElementById('lineSupportVideoModal');
+  const video = document.getElementById('lineSupportVideo');
+  const title = document.getElementById('lineSupportVideoTitle');
+  const close = document.getElementById('lineSupportVideoClose');
+  const seek = document.getElementById('lineSupportVideoSeek');
+
+  if (title) {
+    title.textContent =
+      currentLang === 'th'
+        ? 'ตัวอย่าง LINE OA Support'
+        : 'LINE OA Support Demo';
+  }
+
+  if (close) {
+    close.setAttribute(
+      'aria-label',
+      currentLang === 'th' ? 'ปิด' : 'Close'
+    );
+  }
+
+  if (seek) {
+    seek.setAttribute(
+      'aria-label',
+      currentLang === 'th' ? 'ตำแหน่งวิดีโอ' : 'Video position'
+    );
+  }
+
+  if (!video) return;
+
+  const desired = LINE_SUPPORT_VIDEO[currentLang === 'en' ? 'en' : 'th'];
+  const existing = video.getAttribute('src') || '';
+
+  if (existing !== desired) {
+    const wasOpen = modal?.classList.contains('open');
+    const wasPlaying = !video.paused && !video.ended;
+
+    video.pause();
+    video.src = desired;
+    video.load();
+
+    if (wasOpen && wasPlaying) {
+      video.addEventListener('loadedmetadata', () => {
+        video.play().catch(() => {});
+      }, { once: true });
+    }
+  }
+
+  updateLineSupportVideoControls();
+}
+
+function updateLineSupportVideoControls() {
+  const video = document.getElementById('lineSupportVideo');
+  const play = document.getElementById('lineSupportVideoPlay');
+  const seek = document.getElementById('lineSupportVideoSeek');
+  const current = document.getElementById('lineSupportVideoCurrent');
+  const duration = document.getElementById('lineSupportVideoDuration');
+
+  if (!video) return;
+
+  const total = Number.isFinite(video.duration) ? video.duration : 0;
+  const now = Number.isFinite(video.currentTime) ? video.currentTime : 0;
+  const isPlaying = !video.paused && !video.ended;
+
+  if (play) {
+    play.textContent = isPlaying
+      ? (currentLang === 'th' ? '❚❚ หยุดชั่วคราว' : '❚❚ Pause')
+      : (currentLang === 'th' ? '▶ เล่น' : '▶ Play');
+  }
+
+  if (seek && !seek.matches(':active')) {
+    seek.max = String(total);
+    seek.value = String(Math.min(now, total || now));
+  }
+
+  if (current) current.textContent = formatLineSupportVideoTime(now);
+  if (duration) duration.textContent = formatLineSupportVideoTime(total);
+}
+
+function openLineSupportVideo() {
+  const modal = document.getElementById('lineSupportVideoModal');
+  const video = document.getElementById('lineSupportVideo');
+
+  if (!modal || !video) return;
+
+  updateLineSupportVideoLanguage();
+
+  modal.classList.add('open');
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('line-support-video-open');
+
+  /* User clicked the demo button, so browsers normally allow playback here. */
+  video.play().catch(() => {
+    updateLineSupportVideoControls();
+  });
+
+  document.getElementById('lineSupportVideoClose')?.focus();
+}
+
+function closeLineSupportVideo() {
+  const modal = document.getElementById('lineSupportVideoModal');
+  const video = document.getElementById('lineSupportVideo');
+
+  if (!modal) return;
+
+  if (video) {
+    video.pause();
+    video.currentTime = 0;
+  }
+
+  modal.classList.remove('open');
+  modal.setAttribute('aria-hidden', 'true');
+  document.body.classList.remove('line-support-video-open');
+
+  updateLineSupportVideoControls();
+  document.getElementById('lineSupportDemoBtn')?.focus();
+}
+
+function initLineSupportVideoControls() {
+  const modal = document.getElementById('lineSupportVideoModal');
+  const video = document.getElementById('lineSupportVideo');
+  const play = document.getElementById('lineSupportVideoPlay');
+  const seek = document.getElementById('lineSupportVideoSeek');
+  const close = document.getElementById('lineSupportVideoClose');
+
+  updateLineSupportVideoLanguage();
+
+  close?.addEventListener('click', closeLineSupportVideo);
+
+  modal?.querySelector('[data-line-support-close]')
+    ?.addEventListener('click', closeLineSupportVideo);
+
+  play?.addEventListener('click', () => {
+    if (!video) return;
+
+    if (video.paused || video.ended) {
+      if (video.ended) video.currentTime = 0;
+      video.play().catch(() => {
+        updateLineSupportVideoControls();
+      });
+    } else {
+      video.pause();
+    }
+  });
+
+  seek?.addEventListener('input', () => {
+    if (!video || !Number.isFinite(video.duration)) return;
+
+    video.currentTime = Math.max(
+      0,
+      Math.min(video.duration, Number(seek.value) || 0)
+    );
+
+    updateLineSupportVideoControls();
+  });
+
+  if (video) {
+    [
+      'loadedmetadata',
+      'durationchange',
+      'timeupdate',
+      'play',
+      'pause',
+      'ended',
+      'seeked'
+    ].forEach(eventName => {
+      video.addEventListener(eventName, updateLineSupportVideoControls);
+    });
+  }
+}
+
+/* Robust delegated click:
+   works for both the standalone LINE OA card and the dynamically rendered card. */
+document.addEventListener('click', event => {
+  const trigger = event.target.closest(
+    '#lineSupportDemoBtn, #line-support-demo, [data-line-support-demo]'
+  );
+
+  if (!trigger) return;
+
+  event.preventDefault();
+  openLineSupportVideo();
+});
+
+if (document.readyState === 'loading') {
+  document.addEventListener(
+    'DOMContentLoaded',
+    initLineSupportVideoControls,
+    { once: true }
+  );
+} else {
+  initLineSupportVideoControls();
+}
+
+
+document.addEventListener('keydown', event => {
+  if (
+    event.key === 'Escape' &&
+    document.getElementById('lineSupportVideoModal')?.classList.contains('open')
+  ) {
+    closeLineSupportVideo();
+  }
+});
 
 
 /* =========================================================
@@ -3728,6 +4190,9 @@ function renderRemarks() {
               class="remark-action-btn"
               type="button"
               id="line-support-demo"
+              data-line-support-demo
+              aria-haspopup="dialog"
+              aria-controls="lineSupportVideoModal"
             >
               ▶ ${text.lineSupportDemo}
             </button>
@@ -3832,25 +4297,8 @@ function renderRemarks() {
 
 
   document
-    .getElementById(
-      'line-support-demo'
-    )
-    ?.addEventListener(
-      'click',
-      () => {
-
-        showToast(
-
-          currentLang === 'th'
-
-            ? 'สามารถเพิ่มวิดีโอสาธิต LINE OA Support ในภายหลังได้'
-
-            : 'LINE OA Support demo video can be added later.'
-
-        );
-
-      }
-    );
+    .getElementById('line-support-demo')
+    ?.addEventListener('click', openLineSupportVideo);
 
 }
 
@@ -4467,7 +4915,7 @@ ROLE_ORDER_BADGES[12] = true;
       'AI ถอดเสียงแบบ Real-time',
       'AI สรุป SOAP',
       'AI แนะนำ ICD-10',
-      'AI สร้าง OPD Draft',
+      'AI Draft OPD (อยู่ระหว่างพัฒนา)',
       'แพทย์ตรวจสอบ / แก้ไข',
       'แพทย์ยืนยันข้อมูลสุดท้าย'
     ];
@@ -4775,6 +5223,854 @@ ROLE_ORDER_BADGES[12] = true;
 })();
 
 
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && document.getElementById('step-presentation-overlay')) {
+    closeStepPresentation();
+  }
+});
+
+
+/* =========================================================
+   DEVELOPMENT & PROJECT STATUS — FULL-SCREEN VIEWER
+   - Uses the same TH / EN setting as the website
+   - Responsive on Computer / iPad / Phone
+   - Preserves page scroll position when closed
+   ========================================================= */
+
+let developmentViewerScrollY = 0;
+let developmentViewerTrigger = null;
+
+function openDevelopmentViewer(trigger) {
+
+  const viewer =
+    document.getElementById('developmentViewer');
+
+  const image =
+    document.getElementById('developmentViewerImage');
+
+  const title =
+    document.getElementById('developmentViewerTitle');
+
+
+  if (!viewer || !image || !title || !trigger) {
+    return;
+  }
+
+
+  developmentViewerScrollY =
+    window.scrollY || window.pageYOffset || 0;
+
+  developmentViewerTrigger =
+    trigger;
+
+
+  const imageSrc =
+    currentLang === 'en'
+      ? (trigger.dataset.imageEn || trigger.dataset.imageTh || '')
+      : (trigger.dataset.imageTh || trigger.dataset.imageEn || '');
+
+  const viewerTitle =
+    trigger.dataset[currentLang] ||
+    trigger.textContent.trim();
+
+
+  image.src =
+    imageSrc;
+
+  image.alt =
+    viewerTitle;
+
+  title.textContent =
+    viewerTitle;
+
+
+  viewer.classList.add('open');
+
+  viewer.setAttribute(
+    'aria-hidden',
+    'false'
+  );
+
+  document.body.classList.add(
+    'development-viewer-open'
+  );
+
+
+  document
+    .getElementById('developmentViewerClose')
+    ?.focus();
+
+}
+
+
+function closeDevelopmentViewer() {
+
+  const viewer =
+    document.getElementById('developmentViewer');
+
+  const image =
+    document.getElementById('developmentViewerImage');
+
+
+  if (!viewer) {
+    return;
+  }
+
+
+  viewer.classList.remove('open');
+
+  viewer.setAttribute(
+    'aria-hidden',
+    'true'
+  );
+
+  document.body.classList.remove(
+    'development-viewer-open'
+  );
+
+
+  if (image) {
+    image.src = '';
+  }
+
+
+  window.scrollTo(
+    0,
+    developmentViewerScrollY
+  );
+
+
+  developmentViewerTrigger
+    ?.focus();
+
+  developmentViewerTrigger =
+    null;
+
+}
+
+
+function updateDevelopmentViewerLanguage() {
+
+  const viewer =
+    document.getElementById('developmentViewer');
+
+  const title =
+    document.getElementById('developmentViewerTitle');
+
+
+  if (
+    viewer?.classList.contains('open') &&
+    developmentViewerTrigger &&
+    title
+  ) {
+
+    const translatedTitle =
+      developmentViewerTrigger.dataset[currentLang] ||
+      developmentViewerTrigger.textContent.trim();
+
+    title.textContent =
+      translatedTitle;
+
+    const image =
+      document.getElementById('developmentViewerImage');
+
+    if (image) {
+      image.alt = translatedTitle;
+
+      const translatedImageSrc =
+        currentLang === 'en'
+          ? (
+              developmentViewerTrigger.dataset.imageEn ||
+              developmentViewerTrigger.dataset.imageTh ||
+              ''
+            )
+          : (
+              developmentViewerTrigger.dataset.imageTh ||
+              developmentViewerTrigger.dataset.imageEn ||
+              ''
+            );
+
+      if (
+        translatedImageSrc &&
+        image.getAttribute('src') !== translatedImageSrc
+      ) {
+        image.src = translatedImageSrc;
+      }
+    }
+
+  }
+
+}
+
+
+function bindDevelopmentViewer() {
+
+  document
+    .querySelectorAll('.development-link')
+    .forEach(button => {
+
+      button.addEventListener(
+        'click',
+        () => openDevelopmentViewer(button)
+      );
+
+    });
+
+
+  document
+    .getElementById('developmentViewerBack')
+    ?.addEventListener(
+      'click',
+      closeDevelopmentViewer
+    );
+
+
+  document
+    .getElementById('developmentViewerClose')
+    ?.addEventListener(
+      'click',
+      closeDevelopmentViewer
+    );
+
+
+  const viewer =
+    document.getElementById('developmentViewer');
+
+  viewer?.addEventListener(
+    'click',
+    event => {
+
+      if (event.target === viewer) {
+        closeDevelopmentViewer();
+      }
+
+    }
+  );
+
+
+  document.addEventListener(
+    'keydown',
+    event => {
+
+      if (
+        event.key === 'Escape' &&
+        viewer?.classList.contains('open')
+      ) {
+
+        closeDevelopmentViewer();
+
+      }
+
+    }
+  );
+
+}
+
+
+
+/* =========================================================
+   CINEMATIC PATIENT JOURNEY — V5 ASTRA-INSPIRED STORYTELLING
+   Updated 20 Sep 2026
+   - Audio currentTime is the master timeline
+   - TH / EN use separate scene + step cue timelines
+   - 100% artwork visible: no crop
+   - Step focus moves 01→12 inside the artwork
+   - Flow pulse + scene-specific micro animation
+   - Captions/status live OUTSIDE the artwork
+   - Play / Pause / Seek keep audio + scene + step in sync
+   ========================================================= */
+
+const HERO_NARRATION_TOTAL = 80;
+
+/* Latest narration structure supplied by Kat:
+   Scene 1 = ~13s, Scene 2 = ~14s, Scene 3 = ~14s,
+   Scene 4 = ~13s, Scene 5 = ~13s, Scene 6 = ~13s.
+   The nominal 80-second map is automatically scaled to the REAL audio duration
+   after metadata loads, so TH and EN remain synchronized even if the exported
+   WAV files contain slightly different pauses/tails. */
+const HERO_ASSETS = {
+  th: {
+    audio: 'image/Sound-Hero/Sound-Hero-TH/Sound-Hero-TH.wav',
+    scenes: Array.from({length:6},(_,i)=>`image/PIC-Hero/PIC-Hero-TH/Scene${i+1}-TH.png`),
+    sceneCuts: [0, 13, 27, 41, 54, 67, 80],
+    stepCues: [
+      {time:0,step:'01'}, {time:4.3,step:'02'}, {time:8.7,step:'03'},
+      {time:13,step:'04'}, {time:20,step:'05'},
+      {time:27,step:'06'},
+      {time:41,step:'07'}, {time:47.5,step:'08'},
+      {time:54,step:'09'}, {time:60.5,step:'10'},
+      {time:67,step:'11'}, {time:73.5,step:'12'}
+    ]
+  },
+  en: {
+    audio: 'image/Sound-Hero/Sound-Hero-EN/Sound-Hero-EN.wav',
+    scenes: Array.from({length:6},(_,i)=>`image/PIC-Hero/PIC-Hero-EN/Scene${i+1}-EN.png`),
+    sceneCuts: [0, 13, 27, 41, 54, 67, 80],
+    stepCues: [
+      {time:0,step:'01'}, {time:4.3,step:'02'}, {time:8.7,step:'03'},
+      {time:13,step:'04'}, {time:20,step:'05'},
+      {time:27,step:'06'},
+      {time:41,step:'07'}, {time:47.5,step:'08'},
+      {time:54,step:'09'}, {time:60.5,step:'10'},
+      {time:67,step:'11'}, {time:73.5,step:'12'}
+    ]
+  }
+};
+
+const HERO_SCENE_META = [
+  {steps:'01–03',th:'ลงทะเบียนและตั้งค่าโปรไฟล์ → ข้อมูลสุขภาพและสัญญาณชีพ → นัดหมาย แจ้งเตือน และเช็กอิน',en:'Registration & Profile → Health Information & Vital Signs → Appointment, Notification & Check-in'},
+  {steps:'04–05',th:'ติดตามผู้ป่วยที่ยังไม่เข้าสู่ระบบ → เช็กอิน → พยาบาลซักอาการ ตรวจสัญญาณชีพ และประเมินความเร่งด่วน',en:'Patient Follow-up → Check-in → Nurse Symptoms, Vital Signs & Priority Assessment'},
+  {steps:'06',th:'วิดีโอคอลกับแพทย์ → AI ถอดบทสนทนา → SOAP Note → ICD-10 → ร่างข้อมูล OPD',en:'Doctor Video Consultation → AI Transcription → SOAP Note → ICD-10 → OPD Draft'},
+  {steps:'07–08',th:'BITHIS / ค่าใช้จ่ายและการเงิน → วิธีจัดส่งยา → ชำระเงิน → นัดหมายครั้งถัดไป',en:'BITHIS / Billing & Payment → Medication Delivery → Payment → Next Appointment'},
+  {steps:'09–10',th:'เภสัชกรตรวจสอบใบสั่งยาและเตรียมยา → จัดส่ง → ผู้ป่วยตรวจสอบและส่งรูป/วิดีโอ → เภสัชกรยืนยัน',en:'Prescription Review & Medication Preparation → Delivery → Patient Photo/Video → Pharmacist Verification'},
+  {steps:'11–12',th:'นัดหมายและเช็กอิน → วิดีโอคอลกับเภสัชกร → คำแนะนำเรื่องยาและข้อควรระวัง → จบเส้นทาง 12 ขั้นตอน',en:'Appointment & Check-in → Pharmacist Video Consultation → Medication Counseling & Precautions → Complete 12-Step Journey'}
+];
+
+function getHeroTimelineScale() {
+  if (heroAudio && Number.isFinite(heroAudio.duration) && heroAudio.duration > 0) {
+    return heroAudio.duration / HERO_NARRATION_TOTAL;
+  }
+  return 1;
+}
+
+function getHeroEffectiveSceneCuts() {
+  const scale = getHeroTimelineScale();
+  return getHeroConfig().sceneCuts.map(t => t * scale);
+}
+
+function getHeroEffectiveStepCues() {
+  const scale = getHeroTimelineScale();
+  return getHeroConfig().stepCues.map(cue => ({ ...cue, time: cue.time * scale }));
+}
+
+let heroSceneIndex = 0;
+let heroActiveStep = '01';
+let heroAudio = null;
+let heroInitialized = false;
+let heroSeeking = false;
+let heroWasPlayingBeforeSeek = false;
+let heroRaf = 0;
+
+function getHeroConfig() {
+  return HERO_ASSETS[currentLang === 'en' ? 'en' : 'th'];
+}
+
+function formatHeroTime(seconds) {
+  const safe = Number.isFinite(seconds) ? Math.max(0, seconds) : 0;
+  const min = Math.floor(safe / 60);
+  const sec = Math.floor(safe % 60);
+  return `${min}:${String(sec).padStart(2, '0')}`;
+}
+
+function buildHeroAnimation() {
+  const stage = document.getElementById('heroAnimationStage');
+  if (!stage) return;
+
+  stage.setAttribute('aria-hidden', 'false');
+
+  stage.innerHTML = `
+    <div class="hero-cinema" id="heroCinema">
+
+      <div class="hero-orbit hero-orbit-a" aria-hidden="true"></div>
+      <div class="hero-orbit hero-orbit-b" aria-hidden="true"></div>
+      <div class="hero-cinema-glow" aria-hidden="true"></div>
+
+      <div class="hero-cinema-heading">
+        <div>
+          <span class="hero-cinema-eyebrow">BIT TELEMEDICINE · PATIENT JOURNEY</span>
+          <h2 data-th="จากบ้าน สู่การดูแลแบบครบวงจร" data-en="From Home to Connected Care">
+            จากบ้าน สู่การดูแลแบบครบวงจร
+          </h2>
+        </div>
+        <span class="hero-cinema-live">
+          <i></i>
+          <span data-th="12 ขั้นตอน · 6 ฉาก" data-en="12 STEPS · 6 SCENES">12 ขั้นตอน · 6 ฉาก</span>
+        </span>
+      </div>
+
+      <div class="hero-scene-frame" id="heroSceneFrame">
+        <div class="hero-scene-backdrop" aria-hidden="true"></div>
+
+        ${Array.from({ length: 6 }, (_, index) => `
+          <img
+            class="hero-scene-image ${index === 0 ? 'active' : ''}"
+            id="heroSceneImage${index + 1}"
+            alt=""
+            decoding="async"
+            draggable="false"
+          >
+        `).join('')}
+        <div class="hero-scene-ambient" aria-hidden="true"></div>
+      </div>
+
+      <div class="hero-story-status glass" aria-live="polite">
+        <div class="hero-story-scene">
+          <span class="hero-story-scene-number" id="heroSceneNumber">SCENE 1 / 6</span>
+          <span class="hero-story-scene-steps" id="heroSceneSteps">STEPS 01–03</span>
+        </div>
+        <div class="hero-story-copy">
+          <strong id="heroSceneCaption"></strong>
+          <span id="heroActiveStep">STEP 01</span>
+        </div>
+      </div>
+
+      <div class="hero-step-journey" id="heroStepJourney" aria-label="12-step animation progress">
+        ${Array.from({ length: 12 }, (_, index) => {
+          const step = String(index + 1).padStart(2, '0');
+          return `<button class="hero-step-node ${index === 0 ? 'active' : ''}" data-step="${step}" type="button" aria-label="Go to step ${step}"><i></i><b>${step}</b></button>`;
+        }).join('')}
+        <span class="hero-step-progress" aria-hidden="true"></span>
+      </div>
+
+      <div class="hero-player glass" id="hero-player">
+        <button class="hero-player-btn" id="heroPlayPause" type="button" aria-label="Play animation">
+          <span class="hero-player-icon" id="heroPlayerIcon">▶</span>
+        </button>
+
+        <div class="hero-player-main">
+          <div class="hero-player-meta">
+            <span id="heroPlayerSceneLabel">Scene 1 · Steps 01–03</span>
+            <span class="hero-player-time">
+              <span id="heroCurrentTime">0:00</span>
+              <span aria-hidden="true">/</span>
+              <span id="heroDuration">0:00</span>
+            </span>
+          </div>
+
+          <input
+            class="hero-player-seek"
+            id="heroSeek"
+            type="range"
+            min="0"
+            max="100"
+            value="0"
+            step="0.05"
+            aria-label="Animation timeline"
+          >
+        </div>
+      </div>
+
+      <div class="hero-step-thumbnails" id="heroStepThumbnails" aria-label="12-Step quick navigation">
+        ${steps.slice(0,12).map((item,index)=>{
+          const step=String(index+1).padStart(2,'0');
+          return `<button class="hero-step-thumb ${index===0?'active':''}" data-step="${step}" type="button" aria-label="Go to step ${step}">
+            <span class="hero-step-thumb-icon"><img src="image/${item.icon}" alt=""></span>
+            <b>${step}</b><span class="hero-step-thumb-label"></span>
+          </button>`;
+        }).join('')}
+      </div>
+
+      <div class="hero-cinema-actions">
+        <a class="btn primary hero-skip-to-presentation" href="#presentation"
+           data-th="ไปยังเส้นทาง 12 ขั้นตอน ↓"
+           data-en="Go to the 12-Step Journey ↓">
+          ไปยังเส้นทาง 12 ขั้นตอน ↓
+        </a>
+      </div>
+
+    </div>
+  `;
+
+  updateStaticText();
+  loadHeroLanguageAssets();
+  bindHeroPlayerControls();
+  bindHeroStepNavigation();
+  bindHeroThumbnailNavigation();
+}
+
+function bindHeroThumbnailNavigation(){
+  document.querySelectorAll('.hero-step-thumb').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const step=btn.dataset.step;
+      const cue=getHeroConfig().stepCues.find(c=>c.step===step);
+      if(!cue || !heroAudio) return;
+      const wasPlaying=!heroAudio.paused && !heroAudio.ended;
+      heroAudio.currentTime=cue.time;
+      syncHeroToTime(cue.time,true);
+      if(wasPlaying) heroAudio.play().catch(()=>{});
+    });
+  });
+}
+
+function loadHeroLanguageAssets() {
+  const config = getHeroConfig();
+
+  config.scenes.forEach((src, index) => {
+    const img = document.getElementById(`heroSceneImage${index + 1}`);
+    if (img) {
+      img.src = src;
+      if (typeof img.decode === 'function') img.decode().catch(() => {});
+    }
+
+    const preload = new Image();
+    preload.src = src;
+  });
+
+  heroSceneIndex = 0;
+  heroActiveStep = '01';
+  renderHeroScene(0, true);
+  renderHeroStepState('01', true);
+  prepareHeroAudio();
+}
+
+function prepareHeroAudio() {
+  stopHeroAudio();
+
+  const config = getHeroConfig();
+  heroAudio = new Audio(config.audio);
+  heroAudio.preload = 'metadata';
+
+  heroAudio.addEventListener('loadedmetadata', () => {
+    const duration = Number.isFinite(heroAudio.duration) && heroAudio.duration > 0
+      ? heroAudio.duration
+      : HERO_NARRATION_TOTAL;
+
+    const seek = document.getElementById('heroSeek');
+    if (seek) seek.max = duration;
+
+    const durationEl = document.getElementById('heroDuration');
+    if (durationEl) durationEl.textContent = formatHeroTime(duration);
+
+    syncHeroToTime(0, true);
+  });
+
+  heroAudio.addEventListener('play', () => {
+    document.getElementById('heroCinema')?.classList.add('is-playing');
+    updateHeroPlayerState();
+    startHeroAnimationLoop();
+  });
+
+  heroAudio.addEventListener('pause', () => {
+    document.getElementById('heroCinema')?.classList.remove('is-playing');
+    updateHeroPlayerState();
+    stopHeroAnimationLoop();
+    if (!heroSeeking) syncHeroToTime(heroAudio.currentTime);
+  });
+
+  heroAudio.addEventListener('ended', () => {
+    document.getElementById('heroCinema')?.classList.remove('is-playing');
+    stopHeroAnimationLoop();
+    syncHeroToTime(heroAudio.duration || HERO_NARRATION_TOTAL, true);
+    document.getElementById('heroCinema')?.classList.add('journey-complete');
+    updateHeroPlayerState();
+  });
+
+  heroAudio.addEventListener('seeked', () => {
+    if (!heroSeeking) syncHeroToTime(heroAudio.currentTime, true);
+  });
+}
+
+function startHeroAnimationLoop() {
+  stopHeroAnimationLoop();
+
+  const tick = () => {
+    if (!heroAudio || heroAudio.paused || heroAudio.ended) return;
+    if (!heroSeeking) syncHeroToTime(heroAudio.currentTime);
+    heroRaf = requestAnimationFrame(tick);
+  };
+
+  heroRaf = requestAnimationFrame(tick);
+}
+
+function stopHeroAnimationLoop() {
+  if (heroRaf) cancelAnimationFrame(heroRaf);
+  heroRaf = 0;
+}
+
+function renderHeroScene(index, immediate = false) {
+  const heroSceneEls = Array.from(document.querySelectorAll('.hero-scene-image'));
+  if (!heroSceneEls.length) return;
+
+  const nextIndex = Math.max(0, Math.min(heroSceneEls.length - 1, index));
+  const nextScene = heroSceneEls[nextIndex];
+  const currentScene = heroSceneEls[heroSceneIndex];
+
+  if (!nextScene) return;
+
+  /* First render / forced seek:
+     show the requested scene directly without a transition flash. */
+  if (immediate || !currentScene || nextIndex === heroSceneIndex) {
+    heroSceneEls.forEach((scene, i) => {
+      scene.classList.toggle('active', i === nextIndex);
+      scene.classList.remove('scene-leaving', 'scene-entering');
+      scene.style.zIndex = i === nextIndex ? '2' : '0';
+    });
+    heroSceneIndex = nextIndex;
+    return;
+  }
+
+  /* Keep the old scene fully visible underneath.
+     The new scene fades ON TOP of it.
+     There is never a blank/white/black frame between scenes. */
+  heroSceneEls.forEach(scene => {
+    scene.classList.remove('scene-entering', 'scene-leaving');
+  });
+
+  currentScene.classList.add('active', 'scene-leaving');
+  currentScene.style.zIndex = '1';
+
+  nextScene.classList.add('active', 'scene-entering');
+  nextScene.style.zIndex = '2';
+
+  /* Force initial entering state to paint before starting transition. */
+  void nextScene.offsetWidth;
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      nextScene.classList.add('scene-entering-active');
+    });
+  });
+
+  const cleanup = () => {
+    currentScene.classList.remove('active', 'scene-leaving', 'scene-entering-active');
+    currentScene.style.zIndex = '0';
+
+    nextScene.classList.remove('scene-entering', 'scene-entering-active');
+    nextScene.classList.add('active');
+    nextScene.style.zIndex = '2';
+
+    heroSceneIndex = nextIndex;
+  };
+
+  clearTimeout(nextScene._cinematicCleanup);
+  nextScene._cinematicCleanup = setTimeout(cleanup, 980);
+}
+
+function getHeroSceneFromTime(seconds, cuts) {
+  for (let i = cuts.length - 2; i >= 0; i -= 1) {
+    if (seconds >= cuts[i]) return i;
+  }
+  return 0;
+}
+
+function getHeroStepFromTime(seconds, cues) {
+  let active = cues[0]?.step || '01';
+  for (const cue of cues) {
+    if (seconds >= cue.time) active = cue.step;
+    else break;
+  }
+  return active;
+}
+
+
+function renderHeroStepState(step, immediate = false) {
+  const activeEl = document.getElementById('heroActiveStep');
+  const cinema = document.getElementById('heroCinema');
+
+  heroActiveStep = step;
+  if (activeEl) activeEl.textContent = `STEP ${step}`;
+
+  document.querySelectorAll('.hero-step-thumb').forEach((node, index) => {
+    const nodeStep = node.dataset.step;
+    node.classList.toggle('active', nodeStep === step);
+    node.classList.toggle('reached', Number(nodeStep) < Number(step));
+    node.setAttribute('aria-current', nodeStep === step ? 'step' : 'false');
+
+    const label = node.querySelector('.hero-step-thumb-label');
+    const item = steps[index];
+    if (label && item) {
+      label.textContent = (currentLang === 'en' ? item.en?.short : item.th?.short) || '';
+    }
+  });
+
+  document.querySelectorAll('.hero-step-node').forEach(node => {
+    const nodeStep = node.dataset.step;
+    node.classList.toggle('active', nodeStep === step);
+    node.classList.toggle('reached', Number(nodeStep) < Number(step));
+    node.setAttribute('aria-current', nodeStep === step ? 'step' : 'false');
+  });
+
+  const progress = document.querySelector('.hero-step-progress');
+  if (progress) {
+    const pct = ((Number(step) - 1) / 11) * 100;
+    progress.style.setProperty('--step-progress', `${pct}%`);
+  }
+
+  if (cinema) {
+    cinema.dataset.activeStep = step;
+    cinema.classList.toggle('journey-complete', step === '12' && heroAudio?.ended);
+  }
+}
+
+function syncHeroToTime(seconds, force = false) {
+  const config = getHeroConfig();
+  const duration =
+    heroAudio && Number.isFinite(heroAudio.duration) && heroAudio.duration > 0
+      ? heroAudio.duration
+      : HERO_NARRATION_TOTAL;
+
+  const current = Math.max(0, Math.min(seconds || 0, duration));
+  const sceneCuts = getHeroEffectiveSceneCuts();
+  const stepCues = getHeroEffectiveStepCues();
+
+  const scene = getHeroSceneFromTime(current, sceneCuts);
+  const step = getHeroStepFromTime(current, stepCues);
+
+  renderHeroScene(scene, force);
+  renderHeroStepState(step, force);
+
+  const seek = document.getElementById('heroSeek');
+  const currentEl = document.getElementById('heroCurrentTime');
+  const durationEl = document.getElementById('heroDuration');
+
+  if (seek && !heroSeeking) {
+    seek.max = duration;
+    seek.value = current;
+    const pct = duration > 0 ? (current / duration) * 100 : 0;
+    seek.style.setProperty('--seek-progress', `${pct}%`);
+  }
+
+  if (currentEl) currentEl.textContent = formatHeroTime(current);
+  if (durationEl) durationEl.textContent = formatHeroTime(duration);
+}
+
+function updateHeroPlayerState() {
+  const btn = document.getElementById('heroPlayPause');
+  const icon = document.getElementById('heroPlayerIcon');
+  if (!btn || !icon) return;
+
+  const playing = heroAudio && !heroAudio.paused && !heroAudio.ended;
+  icon.textContent = playing ? '❚❚' : '▶';
+  btn.classList.toggle('playing', Boolean(playing));
+  btn.setAttribute('aria-label', playing ? 'Pause animation' : 'Play animation');
+}
+
+function toggleHeroPlayback() {
+  if (!heroAudio) prepareHeroAudio();
+  if (!heroAudio) return;
+
+  if (heroAudio.ended) {
+    heroAudio.currentTime = 0;
+    document.getElementById('heroCinema')?.classList.remove('journey-complete');
+    syncHeroToTime(0, true);
+  }
+
+  if (heroAudio.paused) {
+    heroAudio.play().catch(() => {});
+  } else {
+    heroAudio.pause();
+  }
+}
+
+function getHeroCueForStep(step) {
+  const cues = getHeroEffectiveStepCues();
+  return cues.find(cue => cue.step === step) || cues[0];
+}
+
+function jumpHeroToStep(step) {
+  const cue = getHeroCueForStep(step);
+  if (!cue) return;
+
+  if (!heroAudio) prepareHeroAudio();
+  if (!heroAudio) return;
+
+  const wasPlaying = !heroAudio.paused && !heroAudio.ended;
+  const applyJump = () => {
+    const duration = Number.isFinite(heroAudio.duration) && heroAudio.duration > 0
+      ? heroAudio.duration
+      : HERO_NARRATION_TOTAL;
+    const target = Math.max(0, Math.min(cue.time, duration));
+
+    document.getElementById('heroCinema')?.classList.remove('journey-complete');
+    heroSeeking = false;
+    heroAudio.currentTime = target;
+    syncHeroToTime(target, true);
+
+    if (wasPlaying) heroAudio.play().catch(() => {});
+    else updateHeroPlayerState();
+  };
+
+  if (heroAudio.readyState >= 1) applyJump();
+  else heroAudio.addEventListener('loadedmetadata', applyJump, { once: true });
+}
+
+function bindHeroStepNavigation() {
+  document.querySelectorAll('.hero-step-node').forEach(node => {
+    node.addEventListener('click', () => jumpHeroToStep(node.dataset.step));
+  });
+}
+
+function bindHeroPlayerControls() {
+  const play = document.getElementById('heroPlayPause');
+  const seek = document.getElementById('heroSeek');
+
+  play?.addEventListener('click', toggleHeroPlayback);
+
+  seek?.addEventListener('pointerdown', () => {
+    heroSeeking = true;
+    heroWasPlayingBeforeSeek = Boolean(heroAudio && !heroAudio.paused);
+    if (heroWasPlayingBeforeSeek) heroAudio.pause();
+  });
+
+  seek?.addEventListener('input', () => {
+    const value = Number(seek.value);
+    const max = Number(seek.max) || 1;
+    const pct = (value / max) * 100;
+
+    seek.style.setProperty('--seek-progress', `${pct}%`);
+    syncHeroToTime(value, true);
+  });
+
+  const finishSeek = () => {
+    if (!heroAudio || !seek) return;
+    heroAudio.currentTime = Number(seek.value);
+    heroSeeking = false;
+    syncHeroToTime(heroAudio.currentTime, true);
+
+    if (heroWasPlayingBeforeSeek) {
+      heroAudio.play().catch(() => {});
+    }
+    heroWasPlayingBeforeSeek = false;
+  };
+
+  seek?.addEventListener('change', finishSeek);
+  seek?.addEventListener('pointerup', finishSeek);
+}
+
+function stopHeroAudio() {
+  stopHeroAnimationLoop();
+
+  if (!heroAudio) return;
+  heroAudio.pause();
+  heroAudio.removeAttribute('src');
+  heroAudio.load();
+  heroAudio = null;
+}
+
+function restartHeroForLanguage() {
+  if (!heroInitialized) return;
+
+  document.getElementById('heroCinema')?.classList.remove('is-playing', 'journey-complete');
+  loadHeroLanguageAssets();
+  updateStaticText();
+
+  const currentEl = document.getElementById('heroCurrentTime');
+  if (currentEl) currentEl.textContent = '0:00';
+
+  const seek = document.getElementById('heroSeek');
+  if (seek) {
+    seek.value = 0;
+    seek.style.setProperty('--seek-progress', '0%');
+  }
+
+  updateHeroPlayerState();
+}
+
+function updateHeroLanguage() {
+  restartHeroForLanguage();
+}
+
+function bindHeroAnimation() {
+  if (heroInitialized) return;
+
+  const stage = document.getElementById('heroAnimationStage');
+  if (!stage) return;
+
+  heroInitialized = true;
+  buildHeroAnimation();
+}
+
+
 /* =========================================================
    INITIALIZE
    ========================================================= */
@@ -4790,6 +6086,10 @@ document.addEventListener(
     bindLanguageButtons();
 
     bindKeyboardNavigation();
+
+    bindDevelopmentViewer();
+
+    bindHeroAnimation();
 
 
     updateLanguageButtons();
@@ -4811,3 +6111,489 @@ document.addEventListener(
 
   }
 );
+
+/* =========================================================
+   PRESENTATION AUDIO MASTER CONTROLLER — 20 SEP 2026
+   Requirements:
+   - Opening Present attempts immediate playback
+   - Button shows Pause while audio is playing, Play while paused
+   - Timeline is driven by audio.currentTime and is seekable
+   - TH/EN follows the current site language and switches audio source
+   - Existing content/layout/scene timing remain untouched
+   ========================================================= */
+(() => {
+  const TH_AUDIO = 'image/Sound-Hero/Sound-Hero-TH/Sound-Hero-TH.wav';
+  const EN_AUDIO = 'image/Sound-Hero/Sound-Hero-EN/Sound-Hero-EN.wav';
+
+  const qFirst = (...selectors) => {
+    for (const s of selectors) {
+      const el = document.querySelector(s);
+      if (el) return el;
+    }
+    return null;
+  };
+
+  const getAudio = () =>
+    document.getElementById('heroAudio') ||
+    document.querySelector('#journey-animation audio') ||
+    document.querySelector('.hero-cinema audio') ||
+    document.querySelector('audio[data-hero-audio]');
+
+  const getPlayButton = () =>
+    document.getElementById('heroPlayBtn') ||
+    document.getElementById('heroPlay') ||
+    qFirst('[data-hero-play]', '.hero-play-btn', '.hero-player-play', '.presentation-play');
+
+  const getTimeline = () =>
+    document.getElementById('heroTimeline') ||
+    qFirst('[data-hero-timeline]', '.hero-timeline input[type="range"]',
+           '.hero-player input[type="range"]', 'input.hero-timeline');
+
+  const getCurrentTimeEl = () =>
+    document.getElementById('heroCurrentTime') ||
+    qFirst('[data-hero-current]', '.hero-current-time');
+
+  const getDurationEl = () =>
+    document.getElementById('heroDuration') ||
+    qFirst('[data-hero-duration]', '.hero-duration');
+
+  const formatTime = (seconds) => {
+    if (!Number.isFinite(seconds) || seconds < 0) seconds = 0;
+    const m = Math.floor(seconds / 60);
+    const s = Math.floor(seconds % 60);
+    return `${m}:${String(s).padStart(2, '0')}`;
+  };
+
+  const currentLanguage = () => {
+    const htmlLang = (document.documentElement.lang || '').toLowerCase();
+    const bodyLang = (document.body?.dataset?.lang || '').toLowerCase();
+    const active = document.querySelector(
+      '[data-lang].active, [data-language].active, .lang-btn.active, .language-btn.active'
+    );
+    const activeLang = (
+      active?.dataset?.lang ||
+      active?.dataset?.language ||
+      active?.getAttribute('lang') ||
+      ''
+    ).toLowerCase();
+
+    const lang = activeLang || bodyLang || htmlLang;
+    return lang.startsWith('en') ? 'en' : 'th';
+  };
+
+  const audioForLanguage = (lang) => lang === 'en' ? EN_AUDIO : TH_AUDIO;
+
+  const updateButton = () => {
+    const audio = getAudio();
+    const btn = getPlayButton();
+    if (!audio || !btn) return;
+
+    const playing = !audio.paused && !audio.ended;
+    const lang = currentLanguage();
+
+    btn.dataset.state = playing ? 'pause' : 'play';
+    btn.setAttribute('aria-pressed', playing ? 'true' : 'false');
+    btn.setAttribute(
+      'aria-label',
+      playing
+        ? (lang === 'en' ? 'Pause presentation' : 'หยุดการนำเสนอชั่วคราว')
+        : (lang === 'en' ? 'Play presentation' : 'เล่นการนำเสนอ')
+    );
+
+    /* Keep icon + text readable in both TH/EN. */
+    btn.textContent = playing
+      ? (lang === 'en' ? '❚❚ Pause' : '❚❚ หยุดชั่วคราว')
+      : (lang === 'en' ? '▶ Play' : '▶ เล่น');
+  };
+
+  const updateTimeline = () => {
+    const audio = getAudio();
+    const timeline = getTimeline();
+    if (!audio) return;
+
+    const duration = Number.isFinite(audio.duration) ? audio.duration : 0;
+    const current = Number.isFinite(audio.currentTime) ? audio.currentTime : 0;
+
+    if (timeline && !timeline.matches(':active')) {
+      timeline.min = '0';
+      timeline.max = String(duration || 0);
+      timeline.step = '0.01';
+      timeline.value = String(Math.min(current, duration || current));
+      const pct = duration > 0 ? (current / duration) * 100 : 0;
+      timeline.style.setProperty('--hero-progress', `${pct}%`);
+      timeline.setAttribute('aria-valuemin', '0');
+      timeline.setAttribute('aria-valuemax', String(duration || 0));
+      timeline.setAttribute('aria-valuenow', String(current));
+    }
+
+    const currentEl = getCurrentTimeEl();
+    const durationEl = getDurationEl();
+    if (currentEl) currentEl.textContent = formatTime(current);
+    if (durationEl) durationEl.textContent = formatTime(duration);
+  };
+
+  const bindAudio = () => {
+    const audio = getAudio();
+    if (!audio || audio.dataset.masterBound === '1') return;
+    audio.dataset.masterBound = '1';
+
+    ['play', 'pause', 'ended', 'loadedmetadata', 'durationchange', 'timeupdate', 'seeked']
+      .forEach(evt => audio.addEventListener(evt, () => {
+        updateButton();
+        updateTimeline();
+      }));
+
+    updateButton();
+    updateTimeline();
+  };
+
+  const bindControls = () => {
+    bindAudio();
+
+    const btn = getPlayButton();
+    if (btn && btn.dataset.masterBound !== '1') {
+      btn.dataset.masterBound = '1';
+      /* Capture phase prevents an older click handler from toggling twice. */
+      btn.addEventListener('click', (event) => {
+        const audio = getAudio();
+        if (!audio) return;
+        event.preventDefault();
+        event.stopImmediatePropagation();
+
+        if (audio.paused || audio.ended) {
+          if (audio.ended) audio.currentTime = 0;
+          audio.play().catch(() => updateButton());
+        } else {
+          audio.pause();
+        }
+      }, true);
+    }
+
+    const timeline = getTimeline();
+    if (timeline && timeline.dataset.masterBound !== '1') {
+      timeline.dataset.masterBound = '1';
+
+      const seek = () => {
+        const audio = getAudio();
+        if (!audio || !Number.isFinite(audio.duration)) return;
+        const next = Math.max(0, Math.min(audio.duration, Number(timeline.value) || 0));
+        audio.currentTime = next;
+        updateTimeline();
+
+        /* Existing hero sync uses audio time; dispatching timeupdate keeps
+           Scene/Step state synchronized after a manual seek. */
+        audio.dispatchEvent(new Event('timeupdate'));
+      };
+
+      timeline.addEventListener('input', seek);
+      timeline.addEventListener('change', seek);
+    }
+  };
+
+  const switchLanguage = (lang, preservePlayback = true) => {
+    const audio = getAudio();
+    if (!audio) return;
+
+    const desired = audioForLanguage(lang);
+    const currentSrc = audio.getAttribute('src') || '';
+    if (currentSrc.endsWith(desired)) {
+      updateButton();
+      return;
+    }
+
+    const wasPlaying = preservePlayback && !audio.paused && !audio.ended;
+    const oldDuration = Number.isFinite(audio.duration) ? audio.duration : 0;
+    const oldTime = Number.isFinite(audio.currentTime) ? audio.currentTime : 0;
+    const ratio = oldDuration > 0 ? oldTime / oldDuration : 0;
+
+    audio.src = desired;
+    audio.load();
+
+    const resume = () => {
+      const duration = Number.isFinite(audio.duration) ? audio.duration : 0;
+      if (duration > 0 && ratio > 0) {
+        audio.currentTime = Math.min(duration - 0.05, duration * ratio);
+      }
+      updateTimeline();
+      updateButton();
+      if (wasPlaying) audio.play().catch(() => updateButton());
+    };
+
+    audio.addEventListener('loadedmetadata', resume, { once: true });
+  };
+
+  const tryAutoPlayPresentation = () => {
+    bindControls();
+    const audio = getAudio();
+    if (!audio) return;
+
+    switchLanguage(currentLanguage(), false);
+
+    /* Called from the user's Present/Open click whenever possible.
+       If a browser blocks sound autoplay, the button remains Play. */
+    audio.play().then(() => {
+      updateButton();
+      updateTimeline();
+    }).catch(() => {
+      updateButton();
+      updateTimeline();
+    });
+  };
+
+  /* Any explicit language control keeps audio matched to the site language. */
+  document.addEventListener('click', (event) => {
+    const langControl = event.target.closest(
+      '[data-lang], [data-language], .lang-btn, .language-btn, [lang="th"], [lang="en"]'
+    );
+    if (langControl) {
+      requestAnimationFrame(() => switchLanguage(currentLanguage(), true));
+      return;
+    }
+
+    /* Opening Present: start audio immediately from this user gesture. */
+    const opener = event.target.closest(
+      '[data-open-presentation], [data-present-open], .presentation-open, .present-btn, .btn-present'
+    );
+    if (opener) {
+      requestAnimationFrame(tryAutoPlayPresentation);
+    }
+  }, true);
+
+  /* Observe class/lang changes too, for existing TH/EN switch implementations. */
+  const observer = new MutationObserver(() => {
+    bindControls();
+    switchLanguage(currentLanguage(), true);
+  });
+
+  const start = () => {
+    bindControls();
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['lang', 'class'],
+      subtree: true
+    });
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', start, { once: true });
+  } else {
+    start();
+  }
+
+  /* Public hook for the existing Present modal code:
+     call window.startBITPresentation() at the end of its open function.
+     This also lets current code start playback without changing scene logic. */
+  window.startBITPresentation = tryAutoPlayPresentation;
+})();
+
+
+/* =========================================================
+   HERO AUDIO MASTER CONTROLLER — 20 SEP 2026
+   Scope: #journey-animation ONLY
+   Present modal remains independent.
+   ========================================================= */
+(() => {
+  const heroRoot = document.getElementById('journey-animation');
+  if (!heroRoot) return;
+
+  const TH_SRC = 'image/Sound-Hero/Sound-Hero-TH/Sound-Hero-TH.wav';
+  const EN_SRC = 'image/Sound-Hero/Sound-Hero-EN/Sound-Hero-EN.wav';
+
+  const heroAudioEl =
+    heroRoot.querySelector('#heroAudio') ||
+    heroRoot.querySelector('audio') ||
+    document.getElementById('heroAudio');
+
+  const heroPlayEl =
+    heroRoot.querySelector('#heroPlayBtn') ||
+    heroRoot.querySelector('#heroPlay') ||
+    heroRoot.querySelector('[data-hero-play]') ||
+    heroRoot.querySelector('.hero-play-btn') ||
+    heroRoot.querySelector('.hero-player-play');
+
+  const heroRangeEl =
+    heroRoot.querySelector('#heroTimeline') ||
+    heroRoot.querySelector('[data-hero-timeline]') ||
+    heroRoot.querySelector('input[type="range"]');
+
+  const heroCurrentEl =
+    heroRoot.querySelector('#heroCurrentTime') ||
+    heroRoot.querySelector('[data-hero-current]') ||
+    heroRoot.querySelector('.hero-current-time');
+
+  const heroDurationEl =
+    heroRoot.querySelector('#heroDuration') ||
+    heroRoot.querySelector('[data-hero-duration]') ||
+    heroRoot.querySelector('.hero-duration');
+
+  if (!heroAudioEl) return;
+
+  const fmt = (sec) => {
+    sec = Number.isFinite(sec) && sec >= 0 ? sec : 0;
+    return `${Math.floor(sec / 60)}:${String(Math.floor(sec % 60)).padStart(2, '0')}`;
+  };
+
+  const getLang = () => {
+    const active = document.querySelector(
+      '[data-lang].active, [data-language].active, .lang-btn.active, .language-btn.active'
+    );
+    const raw = (
+      active?.dataset?.lang ||
+      active?.dataset?.language ||
+      document.body?.dataset?.lang ||
+      document.documentElement.lang ||
+      'th'
+    ).toLowerCase();
+    return raw.startsWith('en') ? 'en' : 'th';
+  };
+
+  const srcFor = (lang) => lang === 'en' ? EN_SRC : TH_SRC;
+
+  const updateHeroButton = () => {
+    if (!heroPlayEl) return;
+    const playing = !heroAudioEl.paused && !heroAudioEl.ended;
+    const lang = getLang();
+
+    heroPlayEl.dataset.state = playing ? 'pause' : 'play';
+    heroPlayEl.setAttribute('aria-pressed', playing ? 'true' : 'false');
+    heroPlayEl.setAttribute(
+      'aria-label',
+      playing
+        ? (lang === 'en' ? 'Pause animation' : 'หยุดแอนิเมชันชั่วคราว')
+        : (lang === 'en' ? 'Play animation' : 'เล่นแอนิเมชัน')
+    );
+
+    /* Hero player keeps the compact control style. */
+    heroPlayEl.textContent = playing
+      ? (lang === 'en' ? '❚❚ Pause' : '❚❚ หยุดชั่วคราว')
+      : (lang === 'en' ? '▶ Play' : '▶ เล่น');
+  };
+
+  let heroUserSeeking = false;
+
+  const updateHeroTimeline = () => {
+    const duration = Number.isFinite(heroAudioEl.duration) ? heroAudioEl.duration : 0;
+    const current = Number.isFinite(heroAudioEl.currentTime) ? heroAudioEl.currentTime : 0;
+
+    if (heroRangeEl && !heroUserSeeking) {
+      heroRangeEl.min = '0';
+      heroRangeEl.max = String(duration || 0);
+      heroRangeEl.step = '0.01';
+      heroRangeEl.value = String(Math.min(current, duration || current));
+      const pct = duration > 0 ? (current / duration) * 100 : 0;
+      heroRangeEl.style.setProperty('--hero-progress', `${pct}%`);
+      heroRangeEl.setAttribute('aria-valuenow', String(current));
+      heroRangeEl.setAttribute('aria-valuemax', String(duration || 0));
+    }
+
+    if (heroCurrentEl) heroCurrentEl.textContent = fmt(current);
+    if (heroDurationEl) heroDurationEl.textContent = fmt(duration);
+  };
+
+  const syncExistingHero = () => {
+    /* Reuse the project's existing scene/step sync if available. */
+    try {
+      if (typeof syncHeroToTime === 'function') {
+        syncHeroToTime(heroAudioEl.currentTime, false);
+      }
+    } catch (_) {}
+  };
+
+  const refresh = () => {
+    updateHeroButton();
+    updateHeroTimeline();
+    syncExistingHero();
+  };
+
+  ['play','pause','ended','loadedmetadata','durationchange','timeupdate','seeked']
+    .forEach(evt => heroAudioEl.addEventListener(evt, refresh));
+
+  if (heroPlayEl) {
+    /* Replace older double-toggle behavior at capture phase. */
+    heroPlayEl.addEventListener('click', (event) => {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+
+      if (heroAudioEl.paused || heroAudioEl.ended) {
+        if (heroAudioEl.ended) heroAudioEl.currentTime = 0;
+        heroAudioEl.play().catch(refresh);
+      } else {
+        heroAudioEl.pause();
+      }
+    }, true);
+  }
+
+  if (heroRangeEl) {
+    const seek = () => {
+      if (!Number.isFinite(heroAudioEl.duration)) return;
+      const t = Math.max(0, Math.min(heroAudioEl.duration, Number(heroRangeEl.value) || 0));
+      heroAudioEl.currentTime = t;
+      updateHeroTimeline();
+      syncExistingHero();
+    };
+
+    heroRangeEl.addEventListener('pointerdown', () => { heroUserSeeking = true; });
+    heroRangeEl.addEventListener('input', seek);
+    heroRangeEl.addEventListener('change', () => {
+      seek();
+      heroUserSeeking = false;
+      updateHeroTimeline();
+    });
+    heroRangeEl.addEventListener('pointerup', () => {
+      heroUserSeeking = false;
+      updateHeroTimeline();
+    });
+  }
+
+  const switchHeroLanguage = (lang) => {
+    const wanted = srcFor(lang);
+    const current = heroAudioEl.getAttribute('src') || '';
+
+    if (current.endsWith(wanted)) {
+      updateHeroButton();
+      return;
+    }
+
+    const wasPlaying = !heroAudioEl.paused && !heroAudioEl.ended;
+    const oldDuration = Number.isFinite(heroAudioEl.duration) ? heroAudioEl.duration : 0;
+    const oldTime = Number.isFinite(heroAudioEl.currentTime) ? heroAudioEl.currentTime : 0;
+    const ratio = oldDuration > 0 ? oldTime / oldDuration : 0;
+
+    heroAudioEl.src = wanted;
+    heroAudioEl.load();
+
+    heroAudioEl.addEventListener('loadedmetadata', () => {
+      if (heroAudioEl.duration > 0 && ratio > 0) {
+        heroAudioEl.currentTime = Math.min(
+          heroAudioEl.duration - 0.05,
+          heroAudioEl.duration * ratio
+        );
+      }
+      refresh();
+      if (wasPlaying) heroAudioEl.play().catch(refresh);
+    }, { once: true });
+  };
+
+  /* Language controls: Hero follows TH/EN independently of Present modal. */
+  document.addEventListener('click', (event) => {
+    const langBtn = event.target.closest(
+      '[data-lang], [data-language], .lang-btn, .language-btn, [lang="th"], [lang="en"]'
+    );
+    if (!langBtn) return;
+    requestAnimationFrame(() => switchHeroLanguage(getLang()));
+  }, true);
+
+  /* Also follow programmatic language changes. */
+  const langObserver = new MutationObserver(() => {
+    switchHeroLanguage(getLang());
+  });
+  langObserver.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['lang', 'class'],
+    subtree: true
+  });
+
+  /* Initialize Hero only. Do NOT autoplay Hero merely because Present opens. */
+  switchHeroLanguage(getLang());
+  refresh();
+})();

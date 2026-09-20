@@ -50,6 +50,7 @@
 
 
 <body>
+  <!-- Latest workflow content revision: 2026-09-18; internal commercial costs excluded -->
 
 
   <!-- =====================================================
@@ -82,12 +83,42 @@
 
       <a
         class="header-link"
-        href="#journey"
+        href="#journey-animation"
         data-th="ภาพรวม"
         data-en="Overview"
       >
         ภาพรวม
       </a>
+
+
+      <!-- DEVELOPMENT & PROJECT STATUS -->
+      <div class="development-header-actions">
+
+        <button
+          class="header-link development-link"
+          id="open-development-status"
+          type="button"
+          data-image-th="image/Adjust-Step01-06-TH.png"
+          data-image-en="image/Adjust-Step01-06-EN.png"
+          data-th="สถานะการพัฒนา 12 ขั้นตอน"
+          data-en="12-Step Development Status"
+        >
+          สถานะการพัฒนา 12 ขั้นตอน
+        </button>
+
+        <button
+          class="header-link development-link"
+          id="open-development-schedule"
+          type="button"
+          data-image-th="image/Dev Schedule-TH.png"
+          data-image-en="image/Dev Schedule-EN.jpg"
+          data-th="ตารางการพัฒนาระบบ"
+          data-en="Development Schedule"
+        >
+          ตารางการพัฒนาระบบ
+        </button>
+
+      </div>
 
 
       <div
@@ -130,72 +161,74 @@
 
 
     <!-- =====================================================
-         HERO
+         HERO — LEFT INTRO CARD + ORIGINAL BIT HEADER ART
+         Right-side temporary icon diagram removed.
+         The animation area can be added here later.
     ====================================================== -->
 
-    <section
-      class="hero"
-      id="hero"
-    >
+    <section class="hero hero-journey hero-clean" id="hero" aria-label="BIT Telemedicine 12-Step Patient Journey">
 
+      <!-- Original BIT Telemedicine header artwork -->
       <img
-        class="hero-art"
+        class="hero-art hero-original-art"
         src="image/header-bit-telemedicine.png"
         alt="BIT Telemedicine"
       >
 
+      <div class="hero-journey-shell hero-clean-shell">
 
-      <div class="hero-overlay">
-
-        <div class="hero-copy glass">
-
-          <p
-            class="eyebrow"
-            data-th="ภาพรวม Workflow แบบ Interactive"
-            data-en="INTERACTIVE WORKFLOW PRESENTATION"
-          >
-            ภาพรวม Workflow แบบ Interactive
+        <!-- KEEP: left intro card -->
+        <div class="hero-copy hero-journey-copy glass">
+          <p class="eyebrow"
+             data-th="EXPECTED END-TO-END PATIENT JOURNEY"
+             data-en="EXPECTED END-TO-END PATIENT JOURNEY">
+            EXPECTED END-TO-END PATIENT JOURNEY
           </p>
-
 
           <h1
             data-th="BIT Telemedicine — เส้นทางการดูแลผู้ป่วย 12 ขั้นตอน"
-            data-en="BIT Telemedicine — 12-Step Patient Journey"
-          >
+            data-en="BIT Telemedicine — 12-Step Patient Journey">
             BIT Telemedicine — เส้นทางการดูแลผู้ป่วย 12 ขั้นตอน
           </h1>
 
-
-          <p
-            class="hero-subtitle"
-            data-th="จาก Teleconsultation สู่การดูแลผู้ป่วยอย่างต่อเนื่องและเชื่อมโยงครบวงจร"
-            data-en="From Teleconsultation to Connected Continuous Care"
-          >
-            จาก Teleconsultation
-            สู่การดูแลผู้ป่วยอย่างต่อเนื่อง
-            และเชื่อมโยงครบวงจร
+          <p class="hero-subtitle"
+             data-th="ติดตามผู้ป่วยหนึ่งคน ตั้งแต่ลงทะเบียนจนจบการให้คำปรึกษาด้านยา"
+             data-en="Follow one patient from registration through medication counseling.">
+            ติดตามผู้ป่วยหนึ่งคน ตั้งแต่ลงทะเบียนจนจบการให้คำปรึกษาด้านยา
           </p>
 
-
-          <div class="hero-actions">
-
+          <div class="hero-actions hero-navigation-actions">
             <a
-              class="btn primary"
+              class="btn primary hero-journey-nav"
               href="#presentation"
-              data-th="เริ่มดูเส้นทางการดูแลผู้ป่วย"
-              data-en="Explore Patient Journey"
+              data-th="ไปยังเส้นทาง 12 ขั้นตอน ↓"
+              data-en="Explore the 12-Step Journey ↓"
             >
-              เริ่มดูเส้นทางการดูแลผู้ป่วย
+              ไปยังเส้นทาง 12 ขั้นตอน ↓
             </a>
-
           </div>
-
         </div>
+
 
       </div>
 
     </section>
 
+
+    <!-- =====================================================
+         CINEMATIC PATIENT JOURNEY
+         Standalone section between the original Hero artwork and Overview
+    ====================================================== -->
+
+    <section
+      class="journey-cinematic-section"
+      id="journey-animation"
+      aria-label="BIT Telemedicine Patient Journey Animation"
+    >
+      <div class="journey-cinematic-shell">
+        <div class="hero-animation-stage" id="heroAnimationStage" aria-hidden="true"></div>
+      </div>
+    </section>
 
 
     <!-- =====================================================
@@ -416,7 +449,9 @@
 
       <!-- STEP CONTENT -->
 
-      <section class="step-stage">
+      <!-- PIC-BIT assets are rendered by script.js: PIC-TH/PIC-EN + Sound-TH/Sound-EN -->
+
+        <section class="step-stage">
 
         <div
           id="step-content"
@@ -486,6 +521,20 @@
             คำถามที่พบบ่อย
             และการติดต่อเจ้าหน้าที่ผ่าน LINE Official Account
           </p>
+
+          <button
+            class="line-support-demo-btn"
+            id="lineSupportDemoBtn"
+            data-line-support-demo
+            type="button"
+            data-th="ดูตัวอย่าง LINE OA Support"
+            data-en="View LINE OA Support Demo"
+            aria-haspopup="dialog"
+            aria-controls="lineSupportVideoModal"
+          >
+            <span aria-hidden="true">▶</span>
+            <span class="line-support-demo-label">ดูตัวอย่าง LINE OA Support</span>
+          </button>
 
         </div>
 
@@ -912,6 +961,137 @@
 
 
   <!-- =====================================================
+       DEVELOPMENT IMAGE VIEWER
+       Full-screen responsive viewer for Computer / iPad / Phone
+  ====================================================== -->
+
+  <div
+    class="development-viewer"
+    id="developmentViewer"
+    aria-hidden="true"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="developmentViewerTitle"
+  >
+
+    <div class="development-viewer-bar">
+
+      <button
+        class="development-viewer-back"
+        id="developmentViewerBack"
+        type="button"
+        data-th="← กลับ"
+        data-en="← Back"
+        aria-label="Back"
+      >
+        ← กลับ
+      </button>
+
+      <strong
+        class="development-viewer-title"
+        id="developmentViewerTitle"
+      >
+        สถานะการพัฒนา 12 ขั้นตอน
+      </strong>
+
+      <button
+        class="development-viewer-close"
+        id="developmentViewerClose"
+        type="button"
+        aria-label="Close"
+        title="Close"
+      >
+        ×
+      </button>
+
+    </div>
+
+    <div class="development-viewer-canvas">
+
+      <img
+        id="developmentViewerImage"
+        class="development-viewer-image"
+        src=""
+        alt=""
+        draggable="false"
+      >
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       LINE OA SUPPORT VIDEO MODAL
+  ====================================================== -->
+
+  <div
+    class="line-support-video-modal"
+    id="lineSupportVideoModal"
+    role="dialog"
+    aria-modal="true"
+    aria-hidden="true"
+    aria-labelledby="lineSupportVideoTitle"
+  >
+    <div class="line-support-video-backdrop" data-line-support-close></div>
+
+    <div class="line-support-video-dialog">
+      <div class="line-support-video-head">
+        <h3 id="lineSupportVideoTitle">LINE OA Support</h3>
+
+        <button
+          class="line-support-video-close"
+          id="lineSupportVideoClose"
+          type="button"
+          aria-label="ปิด"
+        >
+          ×
+        </button>
+      </div>
+
+      <div class="line-support-video-stage">
+        <video
+          id="lineSupportVideo"
+          playsinline
+          preload="metadata"
+        ></video>
+      </div>
+
+      <div class="line-support-video-controls">
+        <button
+          class="line-support-video-play"
+          id="lineSupportVideoPlay"
+          type="button"
+        >
+          ❚❚ หยุดชั่วคราว
+        </button>
+
+        <span
+          class="line-support-video-time"
+          id="lineSupportVideoCurrent"
+        >0:00</span>
+
+        <input
+          class="line-support-video-seek"
+          id="lineSupportVideoSeek"
+          type="range"
+          min="0"
+          max="0"
+          step="0.01"
+          value="0"
+          aria-label="ตำแหน่งวิดีโอ"
+        >
+
+        <span
+          class="line-support-video-time"
+          id="lineSupportVideoDuration"
+        >0:00</span>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- =====================================================
        IMAGE MODAL
   ====================================================== -->
 
@@ -962,3 +1142,11 @@
 </body>
 
 </html>
+<!-- CLEAN CINEMATIC TRANSITION ONLY: no border light, no in-scene effects. -->
+
+<!-- CLEAN TRANSITION PLAYBACK FIX: scene collection runtime bug corrected. -->
+
+<!-- Presentation playback: autoplay-on-open hook + Play/Pause + audio-master timeline + TH/EN sync. -->
+
+<!-- Hero player is independently linked to Hero audio/timeline and TH-EN setting. -->
+
