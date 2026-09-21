@@ -9462,3 +9462,328 @@ body.line-support-video-open {
     justify-self: stretch !important;
   }
 }
+
+/* =========================================================
+   ROLE CARD ALIGNMENT — DEPLOY FIX
+   21 SEP 2026
+   Purpose:
+   - Role 1 + Role 2 always start on the exact same horizontal line
+   - 2-role steps = 2 equal columns
+   - 3-role steps = 2 equal columns + centered third card below
+   - neutralize older offsets / transforms / margins
+   - keep responsive stacking on smaller screens
+   ========================================================= */
+
+.step-role-row {
+  --role-card-gap: 36px !important;
+
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+
+  width: 100% !important;
+  max-width: 100% !important;
+
+  column-gap: var(--role-card-gap) !important;
+  row-gap: 20px !important;
+
+  align-items: start !important;
+  justify-items: stretch !important;
+
+  margin-top: 12px !important;
+  padding: 0 !important;
+
+  overflow: visible !important;
+}
+
+/* ---------- TWO ROLES ---------- */
+.step-role-row.role-count-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  grid-template-rows: auto !important;
+}
+
+.step-role-row.role-count-2 > .step-role-chip:nth-child(1),
+.step-role-row.role-count-2 > .step-role-chip:nth-child(2) {
+  grid-row: 1 !important;
+
+  width: 100% !important;
+  max-width: 100% !important;
+
+  align-self: start !important;
+  justify-self: stretch !important;
+
+  margin: 0 !important;
+  top: auto !important;
+  bottom: auto !important;
+
+  transform: none !important;
+}
+
+/* ---------- THREE ROLES ---------- */
+.step-role-row.role-count-3 {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  grid-template-rows: auto auto !important;
+}
+
+.step-role-row.role-count-3 > .step-role-chip:nth-child(1) {
+  grid-column: 1 !important;
+  grid-row: 1 !important;
+
+  width: 100% !important;
+  max-width: 100% !important;
+
+  align-self: start !important;
+  justify-self: stretch !important;
+
+  margin: 0 !important;
+  top: auto !important;
+  bottom: auto !important;
+
+  transform: none !important;
+}
+
+.step-role-row.role-count-3 > .step-role-chip:nth-child(2) {
+  grid-column: 2 !important;
+  grid-row: 1 !important;
+
+  width: 100% !important;
+  max-width: 100% !important;
+
+  align-self: start !important;
+  justify-self: stretch !important;
+
+  margin: 0 !important;
+  top: auto !important;
+  bottom: auto !important;
+
+  transform: none !important;
+}
+
+.step-role-row.role-count-3 > .step-role-chip:nth-child(3) {
+  grid-column: 1 / -1 !important;
+  grid-row: 2 !important;
+
+  width: calc((100% - var(--role-card-gap)) / 2) !important;
+  max-width: calc((100% - var(--role-card-gap)) / 2) !important;
+
+  align-self: start !important;
+  justify-self: center !important;
+
+  margin: 0 !important;
+  top: auto !important;
+  bottom: auto !important;
+
+  transform: none !important;
+}
+
+/* ---------- ROLE CARD GEOMETRY ---------- */
+.step-role-row > .step-role-chip {
+  position: relative !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+
+  box-sizing: border-box !important;
+
+  min-width: 0 !important;
+  min-height: 126px !important;
+  height: 100% !important;
+
+  margin: 0 !important;
+
+  inset: auto !important;
+
+  vertical-align: top !important;
+}
+
+/* Same top alignment even if an older selector applied an offset. */
+.step-role-row > .step-role-chip:not(:hover):not(:focus-visible) {
+  transform: none !important;
+}
+
+/* Preserve only the intentional hover lift. */
+.step-role-row > .step-role-chip:hover,
+.step-role-row > .step-role-chip:focus-visible {
+  transform: translateY(-2px) !important;
+}
+
+/* ---------- HEADER INSIDE EACH ROLE CARD ---------- */
+.step-role-head {
+  display: grid !important;
+  grid-template-columns: 44px minmax(0, 1fr) !important;
+  align-items: center !important;
+
+  width: 100% !important;
+  min-width: 0 !important;
+  min-height: 60px !important;
+
+  gap: 10px !important;
+}
+
+.step-role-icon {
+  width: 42px !important;
+  height: 42px !important;
+  min-width: 42px !important;
+
+  object-fit: contain !important;
+}
+
+.step-role-copy {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+
+  gap: 3px !important;
+}
+
+.step-role-copy strong {
+  display: block !important;
+
+  min-width: 0 !important;
+  max-width: 100% !important;
+
+  margin: 0 !important;
+
+  line-height: 1.2 !important;
+
+  white-space: normal !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  hyphens: none !important;
+}
+
+.step-role-system {
+  display: flex !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+
+  margin: 0 !important;
+
+  gap: 5px !important;
+
+  line-height: 1.25 !important;
+
+  white-space: normal !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  hyphens: none !important;
+}
+
+/* ---------- FOOTER / ACTION / BUTTON ---------- */
+.step-role-footer {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) max-content !important;
+
+  width: 100% !important;
+  min-width: 0 !important;
+
+  align-items: end !important;
+
+  column-gap: 12px !important;
+  row-gap: 8px !important;
+
+  margin-top: auto !important;
+  padding-top: 9px !important;
+}
+
+.step-role-footer .step-role-action {
+  display: block !important;
+
+  grid-column: 1 !important;
+
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+
+  margin: 0 !important;
+  padding: 0 2px 2px !important;
+
+  white-space: normal !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  hyphens: none !important;
+}
+
+.step-role-footer .role-system-btn {
+  position: static !important;
+
+  grid-column: 2 !important;
+
+  width: max-content !important;
+  min-width: 0 !important;
+  max-width: 190px !important;
+
+  align-self: end !important;
+  justify-self: end !important;
+
+  margin: 0 !important;
+
+  white-space: nowrap !important;
+}
+
+/* Keep order badges visually inside their own card. */
+.step-role-row > .step-role-chip .role-order-badge {
+  top: -13px !important;
+  right: 10px !important;
+  left: auto !important;
+}
+
+/* ---------- RESPONSIVE ---------- */
+/* Presentation sidebar consumes horizontal space.
+   Stack role cards before the cards become cramped. */
+@media (max-width: 1120px) {
+  .step-role-row.role-count-2,
+  .step-role-row.role-count-3 {
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: none !important;
+  }
+
+  .step-role-row.role-count-2 > .step-role-chip:nth-child(1),
+  .step-role-row.role-count-2 > .step-role-chip:nth-child(2),
+  .step-role-row.role-count-3 > .step-role-chip:nth-child(1),
+  .step-role-row.role-count-3 > .step-role-chip:nth-child(2),
+  .step-role-row.role-count-3 > .step-role-chip:nth-child(3) {
+    grid-column: 1 !important;
+    grid-row: auto !important;
+
+    width: 100% !important;
+    max-width: 100% !important;
+
+    align-self: start !important;
+    justify-self: stretch !important;
+
+    margin: 0 !important;
+    transform: none !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .step-role-row {
+    row-gap: 15px !important;
+  }
+
+  .step-role-row > .step-role-chip {
+    min-height: 0 !important;
+  }
+
+  .step-role-footer {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .step-role-footer .step-role-action,
+  .step-role-footer .role-system-btn {
+    grid-column: 1 !important;
+  }
+
+  .step-role-footer .role-system-btn {
+    justify-self: start !important;
+    max-width: 100% !important;
+  }
+}
