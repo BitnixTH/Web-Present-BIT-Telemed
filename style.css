@@ -9959,3 +9959,160 @@ body.line-support-video-open {
     max-width: 26px !important;
   }
 }
+
+
+/* =========================================================
+   2026-09-23 — MOBILE STEP PATH FINAL LAYOUT
+   Equal cards + readable Thai words + API badge without overlap
+   ========================================================= */
+@media (max-width: 620px) {
+
+  /* Every Step Path card keeps exactly the same size */
+  .journey-step {
+    width: 168px !important;
+    min-width: 168px !important;
+    max-width: 168px !important;
+    flex: 0 0 168px !important;
+    height: 100px !important;
+    min-height: 100px !important;
+    max-height: 100px !important;
+  }
+
+  .journey-step-inner,
+  .journey-step:not(.reached) .journey-step-inner,
+  .journey-step.reached .journey-step-inner,
+  .journey-step.active .journey-step-inner {
+    position: relative !important;
+    width: 168px !important;
+    min-width: 168px !important;
+    max-width: 168px !important;
+    height: 100px !important;
+    min-height: 100px !important;
+    max-height: 100px !important;
+    box-sizing: border-box !important;
+
+    display: grid !important;
+    grid-template-columns: 42px minmax(0, 1fr) !important;
+    gap: 7px !important;
+    align-items: center !important;
+
+    padding: 8px !important;
+    overflow: hidden !important;
+  }
+
+  .journey-step-icon-wrap {
+    width: 40px !important;
+    min-width: 40px !important;
+    height: 40px !important;
+    min-height: 40px !important;
+  }
+
+  .journey-step-icon {
+    width: 36px !important;
+    height: 36px !important;
+  }
+
+  /* Number + title use the remaining width.
+     Do NOT reserve title width for the API badge. */
+  .journey-step-text,
+  .journey-step:has(.journey-api-icon) .journey-step-text {
+    position: relative !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    height: auto !important;
+
+    display: grid !important;
+    grid-template-columns: 24px minmax(0, 1fr) !important;
+    column-gap: 4px !important;
+    align-items: center !important;
+
+    padding: 0 !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .journey-step-number,
+  .journey-step.active .journey-step-number {
+    font-size: 11px !important;
+    line-height: 1 !important;
+  }
+
+  /* Thai must wrap at natural word boundaries.
+     No ellipsis and no arbitrary character breaking. */
+  .journey-step-title,
+  .journey-step:has(.journey-api-icon) .journey-step-title {
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    font-size: 10.5px !important;
+    line-height: 1.22 !important;
+
+    white-space: normal !important;
+    word-break: normal !important;
+    overflow-wrap: normal !important;
+    hyphens: none !important;
+
+    overflow: visible !important;
+    text-overflow: clip !important;
+    -webkit-line-clamp: unset !important;
+    -webkit-box-orient: initial !important;
+  }
+
+  /* API badge gets its own visual area at the bottom-left,
+     underneath the main icon — never inside the title column. */
+  .journey-step .journey-api-icon,
+  .journey-step:has(.journey-api-icon) .journey-api-icon {
+    position: absolute !important;
+    left: 13px !important;
+    right: auto !important;
+    bottom: 5px !important;
+    top: auto !important;
+
+    width: 27px !important;
+    height: 27px !important;
+    max-width: 27px !important;
+    margin: 0 !important;
+
+    z-index: 3 !important;
+  }
+
+  .journey-step:not(:last-child)::after {
+    top: 50px !important;
+  }
+}
+
+/* Slightly narrower phones: same logic, still equal-sized cards */
+@media (max-width: 390px) {
+  .journey-step {
+    width: 162px !important;
+    min-width: 162px !important;
+    max-width: 162px !important;
+    flex-basis: 162px !important;
+    height: 100px !important;
+    min-height: 100px !important;
+    max-height: 100px !important;
+  }
+
+  .journey-step-inner,
+  .journey-step:not(.reached) .journey-step-inner,
+  .journey-step.reached .journey-step-inner,
+  .journey-step.active .journey-step-inner {
+    width: 162px !important;
+    min-width: 162px !important;
+    max-width: 162px !important;
+    height: 100px !important;
+    min-height: 100px !important;
+    max-height: 100px !important;
+  }
+
+  .journey-step-title,
+  .journey-step:has(.journey-api-icon) .journey-step-title {
+    font-size: 10px !important;
+    line-height: 1.2 !important;
+  }
+}
