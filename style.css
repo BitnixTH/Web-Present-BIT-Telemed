@@ -10320,3 +10320,54 @@ body.line-support-video-open {
   }
   .journey-step:not(:last-child)::after { top: 58px !important; }
 }
+
+/* Phone only: API badge in the lower-right corner of each Step card. */
+@media (max-width: 620px) {
+  .journey-step {
+    height: 142px !important;
+    min-height: 142px !important;
+    max-height: 142px !important;
+  }
+  .journey-step-inner,
+  .journey-step:not(.reached) .journey-step-inner,
+  .journey-step.reached .journey-step-inner,
+  .journey-step.active .journey-step-inner {
+    position: relative !important;
+    height: 142px !important;
+    min-height: 142px !important;
+    max-height: 142px !important;
+  }
+  .journey-step-icon-wrap {
+    width: 50px !important;
+    min-width: 50px !important;
+    height: 50px !important;
+    min-height: 50px !important;
+    overflow: hidden !important;
+  }
+  .journey-step:has(.journey-api-icon) .journey-step-text {
+    position: static !important;
+    justify-content: flex-start !important;
+    padding-top: 12px !important;
+    padding-bottom: 38px !important;
+    box-sizing: border-box !important;
+  }
+  .journey-step:has(.journey-api-icon) .journey-step-title {
+    font-size: 13px !important;
+    line-height: 1.32 !important;
+  }
+  .journey-step .journey-api-icon,
+  .journey-step:has(.journey-api-icon) .journey-api-icon {
+    position: absolute !important;
+    top: auto !important;
+    left: auto !important;
+    right: 12px !important;
+    bottom: 10px !important;
+    transform: none !important;
+    width: 29px !important;
+    height: 29px !important;
+    max-width: 29px !important;
+    margin: 0 !important;
+    z-index: 3 !important;
+  }
+  .journey-step:not(:last-child)::after { top: 71px !important; }
+}
