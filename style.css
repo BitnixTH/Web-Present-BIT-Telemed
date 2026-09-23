@@ -9787,3 +9787,134 @@ body.line-support-video-open {
     max-width: 100% !important;
   }
 }
+
+
+/* =========================================================
+   2026-09-23 — MOBILE STEP PATH: EQUAL CARD SIZE
+   Keep every Step Path card the same width and height on phone.
+   This final override intentionally sits at the end of style.css.
+   ========================================================= */
+@media (max-width: 620px) {
+  #step-nav,
+  .step-nav {
+    align-items: stretch !important;
+  }
+
+  .journey-step {
+    width: 150px !important;
+    min-width: 150px !important;
+    max-width: 150px !important;
+    flex: 0 0 150px !important;
+    height: 92px !important;
+    min-height: 92px !important;
+    max-height: 92px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .journey-step-inner,
+  .journey-step:not(.reached) .journey-step-inner,
+  .journey-step.reached .journey-step-inner,
+  .journey-step.active .journey-step-inner {
+    width: 150px !important;
+    min-width: 150px !important;
+    max-width: 150px !important;
+    height: 92px !important;
+    min-height: 92px !important;
+    max-height: 92px !important;
+
+    display: grid !important;
+    grid-template-columns: 42px minmax(0, 1fr) !important;
+    align-items: center !important;
+    gap: 7px !important;
+
+    padding: 8px 8px !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+  }
+
+  .journey-step-icon-wrap {
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+    min-height: 40px !important;
+    align-self: center !important;
+  }
+
+  .journey-step-icon {
+    width: 36px !important;
+    height: 36px !important;
+  }
+
+  .journey-step-text {
+    position: relative !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    height: 100% !important;
+
+    display: grid !important;
+    grid-template-columns: 25px minmax(0, 1fr) !important;
+    align-items: center !important;
+    column-gap: 4px !important;
+
+    padding-right: 0 !important;
+    text-align: left !important;
+  }
+
+  .journey-step-number,
+  .journey-step.active .journey-step-number {
+    font-size: 11px !important;
+    line-height: 1 !important;
+  }
+
+  .journey-step-title {
+    display: -webkit-box !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+
+    font-size: 10.5px !important;
+    line-height: 1.18 !important;
+
+    white-space: normal !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-line-clamp: 4 !important;
+  }
+
+  /* Keep API badge inside the fixed-size card without changing card dimensions. */
+  .journey-api-icon {
+    position: absolute !important;
+    right: 5px !important;
+    bottom: 5px !important;
+    top: auto !important;
+
+    width: 30px !important;
+    height: 30px !important;
+    max-width: 30px !important;
+    margin: 0 !important;
+  }
+
+  /* Connector stays centered relative to the fixed card height. */
+  .journey-step:not(:last-child)::after {
+    top: 46px !important;
+  }
+}
+
+@media (max-width: 390px) {
+  .journey-step {
+    width: 144px !important;
+    min-width: 144px !important;
+    max-width: 144px !important;
+    flex-basis: 144px !important;
+  }
+
+  .journey-step-inner,
+  .journey-step:not(.reached) .journey-step-inner,
+  .journey-step.reached .journey-step-inner,
+  .journey-step.active .journey-step-inner {
+    width: 144px !important;
+    min-width: 144px !important;
+    max-width: 144px !important;
+  }
+}
