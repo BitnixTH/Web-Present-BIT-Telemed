@@ -9918,3 +9918,44 @@ body.line-support-video-open {
     max-width: 144px !important;
   }
 }
+
+
+/* =========================================================
+   2026-09-23 — MOBILE STEP PATH: API BADGE NO OVERLAP
+   Reserve space for the API badge so it never covers title text.
+   ========================================================= */
+@media (max-width: 620px) {
+  .journey-step:has(.journey-api-icon) .journey-step-text {
+    padding-right: 30px !important;
+    padding-bottom: 26px !important;
+    box-sizing: border-box !important;
+  }
+
+  .journey-step:has(.journey-api-icon) .journey-step-title {
+    -webkit-line-clamp: 3 !important;
+  }
+
+  .journey-step .journey-api-icon {
+    right: 5px !important;
+    bottom: 5px !important;
+    top: auto !important;
+    width: 28px !important;
+    height: 28px !important;
+    max-width: 28px !important;
+    margin: 0 !important;
+    z-index: 2 !important;
+  }
+}
+
+@media (max-width: 390px) {
+  .journey-step:has(.journey-api-icon) .journey-step-text {
+    padding-right: 28px !important;
+    padding-bottom: 25px !important;
+  }
+
+  .journey-step .journey-api-icon {
+    width: 26px !important;
+    height: 26px !important;
+    max-width: 26px !important;
+  }
+}
