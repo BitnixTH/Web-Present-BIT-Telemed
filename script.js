@@ -3276,89 +3276,84 @@ function openStep(stepId) {
     return;
   }
 
-
   stopAudio();
 
-  currentStepId =
-    stepId;
-
+  currentStepId = stepId;
 
   renderStepNavigation();
-
   renderCurrentStep();
 
+  /*
+    Phone / iPad:
+    The header and Step Path are both sticky. Their real rendered heights can
+    change after the Step Path is rebuilt and after images/fonts settle.
+    Recalculate the offset more than once so the Step title always finishes
+    below the sticky navigation instead of being covered by it.
+  */
+  const scrollSelectedStepIntoView = (behavior = 'auto') => {
 
-  requestAnimationFrame(
-    () => {
+    const target =
+      document.querySelector('#step-content .step-card') ||
+      document.getElementById('step-content') ||
+      document.getElementById('presentation');
 
-      const target =
-        document.getElementById(
-          'step-content'
-        ) ||
-        document.getElementById(
-          'presentation'
-        );
-
-
-      if (!target) {
-        return;
-      }
-
-
-      const header =
-        document.querySelector(
-          '.site-header'
-        );
-
-
-      const headerHeight =
-        header
-          ? header.offsetHeight
-          : 72;
-
-      // On phones and tablets the Step Path is sticky below the header.
-      // Leave room for it when scrolling to the selected Step content.
-      const stickyStepPath =
-        (window.matchMedia('(max-width: 1199px)').matches ||
-         document.documentElement.classList.contains('bit-ipad'))
-          ? document.querySelector('.step-sidebar')
-          : null;
-
-      const stepPathHeight =
-        stickyStepPath &&
-        window.getComputedStyle(stickyStepPath).position === 'sticky'
-          ? stickyStepPath.getBoundingClientRect().height
-          : 0;
-
-
-      const targetTop =
-        target
-          .getBoundingClientRect()
-          .top +
-        window.pageYOffset;
-
-
-      window.scrollTo({
-
-        top:
-          Math.max(
-            0,
-            targetTop -
-            headerHeight -
-            stepPathHeight -
-            16
-          ),
-
-        behavior:
-          'smooth'
-
-      });
-
+    if (!target) {
+      return;
     }
-  );
 
+    const header =
+      document.querySelector('.site-header');
+
+    const headerHeight =
+      header
+        ? Math.ceil(header.getBoundingClientRect().height)
+        : 72;
+
+    const isHorizontalStickyStepPath =
+      window.matchMedia('(max-width: 900px)').matches ||
+      document.documentElement.classList.contains('bit-ipad');
+
+    const stickyStepPath =
+      isHorizontalStickyStepPath
+        ? document.querySelector('.step-sidebar')
+        : null;
+
+    const stepPathHeight =
+      stickyStepPath &&
+      window.getComputedStyle(stickyStepPath).position === 'sticky'
+        ? Math.ceil(stickyStepPath.getBoundingClientRect().height)
+        : 0;
+
+    const safeGap = 18;
+
+    const targetTop =
+      target.getBoundingClientRect().top +
+      window.pageYOffset;
+
+    window.scrollTo({
+      top: Math.max(
+        0,
+        targetTop - headerHeight - stepPathHeight - safeGap
+      ),
+      behavior
+    });
+  };
+
+  requestAnimationFrame(() => {
+    scrollSelectedStepIntoView('smooth');
+
+    // Re-check after layout settles (especially Safari/iPhone/iPad).
+    window.setTimeout(
+      () => scrollSelectedStepIntoView('auto'),
+      180
+    );
+
+    window.setTimeout(
+      () => scrollSelectedStepIntoView('auto'),
+      420
+    );
+  });
 }
-
 
 /* =========================================================
    AUDIO
