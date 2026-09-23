@@ -10242,3 +10242,81 @@ body.line-support-video-open {
     line-height: 1.28 !important;
   }
 }
+
+/* Mobile Step Path: give Thai titles a full text column. */
+@media (max-width: 620px) {
+  .journey-step {
+    width: 260px !important;
+    min-width: 260px !important;
+    max-width: 260px !important;
+    flex: 0 0 260px !important;
+    height: 116px !important;
+    min-height: 116px !important;
+    max-height: 116px !important;
+  }
+  .journey-step-inner,
+  .journey-step:not(.reached) .journey-step-inner,
+  .journey-step.reached .journey-step-inner,
+  .journey-step.active .journey-step-inner {
+    width: 260px !important;
+    min-width: 260px !important;
+    max-width: 260px !important;
+    height: 116px !important;
+    min-height: 116px !important;
+    max-height: 116px !important;
+    display: grid !important;
+    grid-template-columns: 50px minmax(0, 1fr) !important;
+    gap: 12px !important;
+    padding: 10px 12px !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+  }
+  .journey-step-text,
+  .journey-step:has(.journey-api-icon) .journey-step-text {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    height: 100% !important;
+    padding: 0 !important;
+    gap: 5px !important;
+  }
+  .journey-step-number,
+  .journey-step.active .journey-step-number {
+    flex: none !important;
+    font-size: 14px !important;
+    line-height: 1 !important;
+  }
+  .journey-step-title,
+  .journey-step:has(.journey-api-icon) .journey-step-title {
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    font-size: 13px !important;
+    line-height: 1.32 !important;
+    white-space: normal !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+    line-break: auto !important;
+    hyphens: none !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    -webkit-line-clamp: unset !important;
+  }
+  .journey-step .journey-api-icon,
+  .journey-step:has(.journey-api-icon) .journey-api-icon {
+    position: absolute !important;
+    left: 22px !important;
+    right: auto !important;
+    bottom: 7px !important;
+    top: auto !important;
+    width: 27px !important;
+    height: 27px !important;
+    max-width: 27px !important;
+    margin: 0 !important;
+  }
+  .journey-step:not(:last-child)::after { top: 58px !important; }
+}
