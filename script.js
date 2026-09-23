@@ -1,3 +1,10 @@
+// iPadOS may request the desktop version of a site and report a fine pointer.
+// Mark iPad explicitly so its Step Path layout does not depend on pointer mode.
+if (/iPad/i.test(navigator.userAgent) ||
+    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) {
+  document.documentElement.classList.add('bit-ipad');
+}
+
 const CURRENT_SYSTEM = {
   patient: 'https://tsqmdpu.com/projects/bit-telemedicine-patient-yii2/',
   nurse: 'https://tsqmdpu.com/projects/bit-telemedicine-patient-yii2/nurse',
@@ -3309,6 +3316,20 @@ function openStep(stepId) {
           ? header.offsetHeight
           : 72;
 
+      // On phones and tablets the Step Path is sticky below the header.
+      // Leave room for it when scrolling to the selected Step content.
+      const stickyStepPath =
+        (window.matchMedia('(max-width: 1199px)').matches ||
+         document.documentElement.classList.contains('bit-ipad'))
+          ? document.querySelector('.step-sidebar')
+          : null;
+
+      const stepPathHeight =
+        stickyStepPath &&
+        window.getComputedStyle(stickyStepPath).position === 'sticky'
+          ? stickyStepPath.getBoundingClientRect().height
+          : 0;
+
 
       const targetTop =
         target
@@ -3324,7 +3345,8 @@ function openStep(stepId) {
             0,
             targetTop -
             headerHeight -
-            12
+            stepPathHeight -
+            16
           ),
 
         behavior:
