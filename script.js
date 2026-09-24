@@ -5509,6 +5509,7 @@ const HERO_ASSETS = {
   th: {
     audio: 'image/Sound-Hero/Sound-Hero-TH/Sound-Hero-TH.wav',
     scenes: Array.from({length:6},(_,i)=>`image/PIC-Hero/PIC-Hero-TH/Scene${i+1}-TH.png`),
+    videos: Array.from({length:6},(_,i)=>`image/VDO-Hero/th/${i+1}-TH-NS.mov`),
     sceneCuts: [0, 13, 27, 41, 54, 67, 80],
     stepCues: [
       {time:0,step:'01'}, {time:4.3,step:'02'}, {time:8.7,step:'03'},
@@ -5522,6 +5523,7 @@ const HERO_ASSETS = {
   en: {
     audio: 'image/Sound-Hero/Sound-Hero-EN/Sound-Hero-EN.wav',
     scenes: Array.from({length:6},(_,i)=>`image/PIC-Hero/PIC-Hero-EN/Scene${i+1}-EN.png`),
+    videos: Array.from({length:6},(_,i)=>`image/VDO-Hero/en/${i+1}-EN-NS.mov`),
     sceneCuts: [0, 13, 27, 41, 54, 67, 80],
     stepCues: [
       {time:0,step:'01'}, {time:4.3,step:'02'}, {time:8.7,step:'03'},
@@ -5616,6 +5618,16 @@ function buildHeroAnimation() {
             decoding="async"
             draggable="false"
           >
+          <video
+            class="hero-scene-video"
+            id="heroSceneVideo${index + 1}"
+            hidden
+            muted
+            playsinline
+            webkit-playsinline
+            preload="metadata"
+            aria-hidden="true"
+          ></video>
         `).join('')}
         <div class="hero-scene-ambient" aria-hidden="true"></div>
       </div>
@@ -5699,7 +5711,7 @@ function bindHeroThumbnailNavigation(){
   document.querySelectorAll('.hero-step-thumb').forEach(btn=>{
     btn.addEventListener('click',()=>{
       const step=btn.dataset.step;
-      const cue=getHeroConfig().stepCues.find(c=>c.step===step);
+      const cue=getHeroEffectiveStepCues().find(c=>c.step===step);
       if(!cue || !heroAudio) return;
       const wasPlaying=!heroAudio.paused && !heroAudio.ended;
       heroAudio.currentTime=cue.time;
@@ -5721,6 +5733,28 @@ function loadHeroLanguageAssets() {
 
     const preload = new Image();
     preload.src = src;
+  });
+
+  config.videos.forEach((src, index) => {
+    const video = document.getElementById(`heroSceneVideo${index + 1}`);
+    if (!video) return;
+
+    video.pause();
+    video.classList.remove('active');
+    video.hidden = true;
+    video.muted = true;
+    video.playsInline = true;
+    video.preload = 'metadata';
+    video.src = src;
+    video.load();
+
+    video.onloadedmetadata = () => {
+      if (heroAudio) syncHeroSceneVideo(heroAudio.currentTime, true);
+    };
+
+    video.onended = () => {
+      video.classList.remove('active');
+    };
   });
 
   heroSceneIndex = 0;
@@ -5909,6 +5943,116 @@ function renderHeroStepState(step, immediate = false) {
   }
 }
 
+function stopAllHeroSceneVideos(exceptIndex = -1) {
+  document.querySelectorAll('.hero-scene-video').forEach((video, index) => {
+    if (index === exceptIndex) return;
+    video.pause();
+    video.classList.remove('active');
+    video.hidden = true;
+  });
+}
+
+/* =========================================================
+   HERO MEDIA REPLACEMENT — VIDEO <-> STILL
+   Audio remains the master timeline.
+
+   IMPORTANT:
+   - Video and still are NEVER visible at the same time.
+   - At the beginning of each scene, show only that scene's video.
+   - When the video ends before the original audio scene cut,
+     hide the video completely and show only the matching still.
+   - If the audio scene cut arrives first, stop/hide the current
+     video immediately and start the next scene.
+   - Never loop, stretch, or slow a video.
+   ========================================================= */
+function syncHeroSceneVideo(seconds, force = false) {
+  const sceneCuts = getHeroEffectiveSceneCuts();
+  const sceneIndex = getHeroSceneFromTime(seconds, sceneCuts);
+  const sceneStart = sceneCuts[sceneIndex] || 0;
+  const elapsed = Math.max(0, seconds - sceneStart);
+
+  const video = document.getElementById(`heroSceneVideo${sceneIndex + 1}`);
+  const image = document.getElementById(`heroSceneImage${sceneIndex + 1}`);
+
+  stopAllHeroSceneVideos(sceneIndex);
+
+  /* Hide every non-current still. The existing renderHeroScene()
+     still controls scene selection; this only enforces that video
+     and still cannot overlap inside the current scene. */
+  document.querySelectorAll('.hero-scene-image').forEach((img, index) => {
+    if (index !== sceneIndex) {
+      img.classList.remove('media-visible');
+    }
+  });
+
+  if (!video || !image) return;
+
+  const durationReady = Number.isFinite(video.duration) && video.duration > 0;
+
+  /* Until video metadata is ready, use the still as a safe fallback.
+     As soon as metadata loads, loadedmetadata calls this sync again. */
+  if (!durationReady) {
+    video.pause();
+    video.classList.remove('active');
+    video.hidden = true;
+
+    image.classList.add('media-visible');
+    return;
+  }
+
+  /* Video has finished inside this scene:
+     remove it from display and replace it with the still image. */
+  if (elapsed >= video.duration - 0.03) {
+    video.pause();
+    video.classList.remove('active');
+    video.hidden = true;
+
+    image.classList.add('media-visible');
+    return;
+  }
+
+  /* Video is still inside its own duration:
+     hide the still FIRST, then show the video.
+     This guarantees there is no image/video overlay. */
+  image.classList.remove('media-visible');
+
+  video.hidden = false;
+  video.classList.add('active');
+
+  const drift = Math.abs((video.currentTime || 0) - elapsed);
+  if (force || drift > 0.22) {
+    try {
+      video.currentTime = Math.min(
+        Math.max(0, elapsed),
+        Math.max(0, video.duration - 0.01)
+      );
+    } catch (_) {}
+  }
+
+  const audioIsPlaying = Boolean(
+    heroAudio &&
+    !heroAudio.paused &&
+    !heroAudio.ended &&
+    !heroSeeking
+  );
+
+  if (audioIsPlaying) {
+    const playPromise = video.play();
+    if (playPromise && typeof playPromise.catch === 'function') {
+      playPromise.catch(() => {
+        /* If the browser cannot play this media format,
+           fall back cleanly to the still instead of overlaying. */
+        video.pause();
+        video.classList.remove('active');
+        video.hidden = true;
+        image.classList.add('media-visible');
+      });
+    }
+  } else {
+    video.pause();
+  }
+}
+
 function syncHeroToTime(seconds, force = false) {
   const config = getHeroConfig();
   const duration =
@@ -5925,6 +6069,7 @@ function syncHeroToTime(seconds, force = false) {
 
   renderHeroScene(scene, force);
   renderHeroStepState(step, force);
+  syncHeroSceneVideo(current, force);
 
   const seek = document.getElementById('heroSeek');
   const currentEl = document.getElementById('heroCurrentTime');
@@ -6046,6 +6191,7 @@ function bindHeroPlayerControls() {
 
 function stopHeroAudio() {
   stopHeroAnimationLoop();
+  stopAllHeroSceneVideos();
 
   if (!heroAudio) return;
   heroAudio.pause();

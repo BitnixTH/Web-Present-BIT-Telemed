@@ -10879,3 +10879,89 @@ body.line-support-video-open {
     box-sizing: border-box !important;
   }
 }
+
+
+/* =========================================================
+   HERO MEDIA REPLACEMENT — 24 SEP 2026
+   Scope: #journey-animation only.
+   Video and still are mutually exclusive — never layered.
+   Audio remains the unchanged master timeline.
+   ========================================================= */
+
+/* Current scene still is hidden by default while its video is playing.
+   JS adds .media-visible only after the video has ended (or if video
+   metadata/playback is unavailable). */
+#journey-animation .hero-scene-image.active {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  display: none !important;
+  z-index: 2 !important;
+}
+
+#journey-animation .hero-scene-image.active.media-visible {
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+}
+
+/* A scene video occupies the SAME media box as the still image,
+   but it is never displayed at the same time as that still. */
+#journey-animation .hero-scene-video {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 3 !important;
+
+  width: 100% !important;
+  height: 100% !important;
+  padding: clamp(10px, 1.2vw, 18px);
+
+  object-fit: contain !important;
+  object-position: center center !important;
+
+  background: transparent !important;
+  pointer-events: none !important;
+
+  opacity: 0 !important;
+  visibility: hidden !important;
+  display: none !important;
+
+  transform: none !important;
+  filter: none !important;
+  animation: none !important;
+  transition: none !important;
+
+  backface-visibility: hidden !important;
+  -webkit-backface-visibility: hidden !important;
+}
+
+#journey-animation .hero-scene-video.active:not([hidden]) {
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+}
+
+/* Native hidden must always win. */
+#journey-animation .hero-scene-video[hidden] {
+  display: none !important;
+}
+
+/* Keep replacement media aligned with the existing still artwork
+   on tablet/iPad and phone. */
+@media (min-width: 641px) and (max-width: 1100px) {
+  #journey-animation .hero-scene-video {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 640px) {
+  #journey-animation .hero-scene-video {
+    padding: 6px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #journey-animation .hero-scene-video {
+    transition: none !important;
+    animation: none !important;
+  }
+}
