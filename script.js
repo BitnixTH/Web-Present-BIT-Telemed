@@ -9,7 +9,7 @@ const CURRENT_SYSTEM = {
   patient: 'https://tsqmdpu.com/projects/bit-telemedicine-patient-yii2/',
   nurse: 'https://tsqmdpu.com/projects/bit-telemedicine-patient-yii2/nurse',
   doctor: 'https://tsqmdpu.com/projects/bit-telemedicine-patient-yii2/doctor',
-  pharmacist: ''
+  pharmacist: 'https://tsqmdpu.com/projects/bit-telemedicine-patient-yii2/pharmacist'
 };
 
 
